@@ -24,7 +24,7 @@ Speakers: Tom Kraljevic
 
 There will be time for questions at the event.
 
-After conclusion of the event, please send questions to <h2ostream@googlegroups.com>.
+After the event concludes, please send questions to <h2ostream@googlegroups.com>.
 
 ---
 
