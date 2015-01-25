@@ -46,11 +46,11 @@ After the event concludes, please send questions to <h2ostream@googlegroups.com>
 
 #### Software packages
 
-* [H2O Mirzakhani release documentation](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/index.html)
-* [H2O Software architecture](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/developuser/h2o_sw_arch.html)
-* [H2O GLM documentation](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/datascience/glm.html) (Contains many references)
+* [H2O Mirzakhani Release Documentation](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/index.html)
+* [H2O Software Architecture](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/developuser/h2o_sw_arch.html)
+* [H2O GLM Documentation](http://h2o-release.s3.amazonaws.com/h2o/rel-mirzakhani/2/docs-website/datascience/glm.html) (Contains many references)
 * [H2O GLM Vignette](https://github.com/h2oai/h2o/blob/master/docs/glm/GLM_Vignette.pdf) (Contains many references)
-* [R glmnet package](http://cran.r-project.org/web/packages/glmnet/index.html) (Contains many references)
+* [glmnet package for R](http://cran.r-project.org/web/packages/glmnet/index.html) (Contains many references)
 
 #### Talks
 
