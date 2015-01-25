@@ -4,7 +4,7 @@
 
 ## Event Information
 
-Event: Atlanta Big Data Science
+Event: [Atlanta Big Data Science](http://www.meetup.com/Atlanta-Big-Data/events/219651141/)
 
 Date: January 27, 2015
 
