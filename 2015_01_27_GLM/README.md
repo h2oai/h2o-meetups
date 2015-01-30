@@ -16,7 +16,8 @@ Speakers: Tom Kraljevic
 
 ## Content
 
-* Slides placeholder
+* [Slides PDF](DistributedGLM_TK_2015_01_27_ATL.pdf)
+* [Slides PPT](DistributedGLM_TK_2015_01_27_ATL.pptx)
 
 ---
 
