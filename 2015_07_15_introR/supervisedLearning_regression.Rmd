@@ -1,0 +1,190 @@
+# Regression using Generalized Linear Models, Gradient Boosting Machines, Random Forests and Deep Learning in H2O
+
+###### This tutorial demonstrates regression modeling in H2O using generalized linear models (GLM), gradient boosting machines (GBM), random forests and Deep Learning. It requires an installation of the h2o R package and its dependencies.
+
+### Load the h2o R package and start an local H2O cluster
+
+###### We will begin this tutorial by starting a local H2O cluster using the default heap size and as much compute as the operating system will allow.
+
+    library(h2o)
+    h2oServer <- h2o.init(nthreads = -1)
+
+### Load and prepare the training and testing data for analysis
+
+###### This tutorial uses a 0.1% sample of the Person-Level 2013 Public Use Microdata Sample (PUMS) from United States Census Bureau with 75% of that sample being designated to the training data set and 25% to the test data set. This data set is intended to be an update to the [UCI Adult Data Set](https://archive.ics.uci.edu/ml/datasets/Adult).
+    
+    rootdir <- "/Users/spencer/meetups/introR"
+    datadir <- file.path(rootdir,"/data")
+    pumsdir <- file.path(datadir, "h2o-training", "pums2013")
+    trainfile <- "adult_2013_train.csv.gz"
+    testfile  <- "adult_2013_test.csv.gz"
+
+    adult_2013_train <- h2o.importFile(path = file.path(pumsdir, trainfile),
+                                       destination_frame = "adult_2013_train", sep = ",")
+
+    adult_2013_test <- h2o.importFile(path = file.path(pumsdir, testfile),
+                                      destination_frame = "adult_2013_test", sep = ",")
+
+    dim(adult_2013_train)
+    dim(adult_2013_test)
+
+###### For the purposes of validation, we will create a single column data set containing only the target variable `LOG_WAGP` from the test data set.
+
+    actual_log_wagp <- h2o.assign(adult_2013_test[, "LOG_WAGP"],
+                                  key = "actual_log_wagp")
+
+###### Also for our data set we have 8 columns that use integer codes to represent categorical levels so we will coerce them to factor after the data read.
+
+    for (j in c("COW", "SCHL", "MAR", "INDP", "RELP", "RAC1P", "SEX", "POBP")) {
+      adult_2013_train[[j]] <- as.factor(adult_2013_train[[j]])
+      adult_2013_test[[j]]  <- as.factor(adult_2013_test[[j]])
+    }
+
+### Fit a basic generalized linear model
+
+###### To illustrate some regression concepts, we will add a column of random categories to the training data set.
+
+    rand <- h2o.runif(adult_2013_train, seed = 123)
+    randgrp <- h2o.cut(rand, seq(0, 1, by = 0.01))
+    adult_2013_train <- h2o.cbind(adult_2013_train, RAND_GRP = randgrp)
+    adult_2013_train <- h2o.assign(adult_2013_train, key = "adult_2013_train")
+
+###### We will start with an ordinary linear model that is trained using the `h2o.glm` function with Gaussian (Normal) error and no elastic net regularization (`lambda = 0`).
+
+    log_wagp_glm_0 <- h2o.glm(x = "rnd", y = "LOG_WAGP",
+                              training_frame = adult_2013_train,
+                              model_id  = "log_wagp_glm_0",
+                              family = "gaussian",
+                              lambda = 0)
+    log_wagp_glm_0
+
+### Inspect an object containing a single generalized linear model
+
+###### When a single model is trained by `h2o.glm` it produces an object of class `H2ORegressionModel`.
+
+    class(log_wagp_glm_0)
+    getClassDef("H2ORegressionModel")
+
+###### In this model object, most of the values of interest are contained in the `model` slot.
+
+    h2o.coef(log_wagp_glm_0) # similar to stats:::coef.default
+    h2o.aic(log_wagp_glm_0)
+    1 - h2o.residual_deviance(log_wagp_glm_0) / h2o.null_deviance(log_wagp_glm_0)
+
+### Explore categorical predictors
+
+###### In generalized linear models, a categorical variable with k categories is expanded into k - 1 model coefficients. This expansion can occur in many different forms, with the most common being *dummy variable* encodings consisting of indicator columns for all but the first or last category, depending on the convention.
+
+###### We will begin our modeling of the data by examining the regression of the natural logarithm of wages (`LOG_WAGP`) against three sets of predictors: relationship (`RELP`), educational attainment (`SCHL`), and combination of those two variables (`RELP_SCHL`).
+
+    log_wagp_glm_relp <- h2o.glm(x = "RELP", y = "LOG_WAGP",
+                                 training_frame = adult_2013_train,
+                                 model_id  = "log_wagp_glm_relp",
+                                 family = "gaussian",
+                                 lambda = 0)
+
+    log_wagp_glm_schl <- h2o.glm(x = "SCHL", y = "LOG_WAGP",
+                                 training_frame = adult_2013_train,
+                                 model_id  = "log_wagp_glm_schl",
+                                 family = "gaussian",
+                                 lambda = 0)
+
+    log_wagp_glm_relp_schl <- h2o.glm(x = "RELP_SCHL", y = "LOG_WAGP",
+                                      training_frame = adult_2013_train,
+                                      model_id  = "log_wagp_glm_relp_schl",
+                                      family = "gaussian",
+                                      lambda = 0)
+
+###### As we can see below, both the Akaike information criterion (AIC) and percent deviance explained metrics point to using a combination of `RELP` and `SCHL` in a linear model for `LOG_WAGP`.
+
+    h2o.aic(log_wagp_glm_relp)
+    h2o.aic(log_wagp_glm_schl)
+    h2o.aic(log_wagp_glm_relp_schl)
+    1 - h2o.residual_deviance(log_wagp_glm_relp) / h2o.null_deviance(log_wagp_glm_relp)
+    1 - h2o.residual_deviance(log_wagp_glm_schl) / h2o.null_deviance(log_wagp_glm_schl)
+    1 - h2o.residual_deviance(log_wagp_glm_relp_schl) / h2o.null_deviance(log_wagp_glm_relp_schl)
+
+### Fit an elastic net regression model across a grid of parameter settings
+
+###### Now that we are familiar with H2O model fitting in R, we can fit more sophisticated models involving a larger set of predictors.
+
+    addpredset <- c("COW", "MAR", "INDP", "RAC1P", "SEX", "POBP", "AGEP",
+                    "WKHP", "LOG_CAPGAIN", "LOG_CAPLOSS")
+
+###### In the context of elastic net regularization, we need to search the parameter space defined by the mixing parameter `alpha` and the shrinkage parameter `lambda`. To aide us in this search H2O can produce a grid of models for all combinations of a discrete set of parameters.
+
+###### We will use different methods for specifying the `alpha` and `lambda` values as they are dependent upon one another. For the `alpha` parameter, we will specify five values ranging from 0 (ridge) to 1 (lasso) by increments of 0.25. For `lambda`, we will turn on an automated `lambda` search by setting `lambda = TRUE` and specify the number of `lambda` values to 10 by setting `nlambda = 10`.
+
+    log_wagp_glm <- h2o.glm(x = c("RELP_SCHL", addpredset), y = "LOG_WAGP",
+                                 training_frame = adult_2013_train,
+                                 model_id  = "log_wagp_glm_grid",
+                                 family = "gaussian",
+                                 lambda_search = TRUE,
+                                 nlambda = 10,
+                                 alpha = 0.5)
+
+### Fit a gaussian regression with a log link function
+
+###### In the previous example we modeled `WAGP` on a natural logarithm scale, which implied a multiplicative error structure. We can explore if we have an additive error, but supplying the untransformed wage variable (`WAGP`) as the response and using the natural logarithm link function.
+
+    wagp_glm_grid <- h2o.glm(x = c("RELP_SCHL", addpredset), y = "WAGP",
+                             training_frame = adult_2013_train,
+                             model_id  = "log_wagp_glm_grid",
+                             family = "gaussian",
+                             link   = "log",
+                             lambda_search = TRUE,
+                             nlambda = 10,
+                             alpha = 0.5)
+    wagp_glm_grid
+
+### Fit a gradient boosting machine regression model
+
+###### Given that not all relationships can be reduced to a linear combination or terms, we can compare the GLM results with that of a gradient (tree) boosting machine. As with the final GLM exploration, we will fit a grid of GBM models by varying the number of trees and the shrinkage rate and select the best model with respect to the test data set.
+
+    log_wagp_gbm <- h2o.gbm(x = c("RELP", "SCHL", addpredset),
+                                 y = "LOG_WAGP",
+                                 training_frame = adult_2013_train,
+                                 model_id  = "log_wagp_gbm_grid",
+                                 distribution = "gaussian",
+                                 n.trees = 20,
+                                 shrinkage = 0.1,
+                                 validation = adult_2013_test,
+                                 importance = TRUE)
+    log_wagp_gbm
+    h2o.varimp(log_wagp_gbm)
+
+###### A comparison of mean squared errors against the test set suggests our GBM fit outperforms our GLM fit.
+
+    h2o.mse(h2o.performance(log_wagp_glm, adult_2013_test))
+    h2o.mse(h2o.performance(log_wagp_gbm, adult_2013_test))
+
+
+### Fit a random forest regression model
+
+###### We will fit a single random forest model with 200 trees of maximum depth 10.
+
+    log_wagp_forest <- h2o.randomForest(x = c("RELP", "SCHL", addpredset),
+                                        y = "LOG_WAGP",
+                                        training_frame = adult_2013_train,
+                                        model_id  = "log_wagp_forest",
+                                        depth = 10,
+                                        ntree = 200,
+                                        validation = adult_2013_test,
+                                        seed = 8675309)
+    log_wagp_forest
+
+### Fit a deep learning regression model
+
+###### Lastly we will fit a single Deep Learning model with default settings (more details about Deep Learning follow later) and compare the mean squared errors across the four model types.
+
+    log_wagp_dl <- h2o.deeplearning(x = c("RELP", "SCHL", addpredset),
+                                    y = "LOG_WAGP",
+                                    training_frame = adult_2013_train,
+                                    model_id  = "log_wagp_dl",
+                                    validation = adult_2013_test)
+    log_wagp_dl
+
+    h2o.mse(h2o.performance(log_wagp_glm,    adult_2013_test))
+    h2o.mse(h2o.performance(log_wagp_gbm,    adult_2013_test))
+    h2o.mse(h2o.performance(log_wagp_forest, adult_2013_test))
+    h2o.mse(h2o.performance(log_wagp_dl,     adult_2013_test))
