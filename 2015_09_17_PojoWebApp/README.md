@@ -1,10 +1,10 @@
-# POJO WebApp
+# Building a Smarter WebApp with a Generated POJO Model
 
 ---
 
 ## Event Information
 
-Event: [Silicon Valley Big Data Science]()
+Event: [Silicon Valley Big Data Science](http://www.meetup.com/Silicon-Valley-Big-Data-Science/events/224337818/)
 
 Date: September 17, 2015
 
