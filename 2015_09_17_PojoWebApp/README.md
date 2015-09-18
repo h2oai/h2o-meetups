@@ -18,6 +18,7 @@ Speakers: Tom Kraljevic
 
 * [Slides PDF](PojoWebApp_TK_2015_09_17.pptx.pdf)
 * [Slides PPT](PojoWebApp_TK_2015_09_17.pptx)
+* [POJO REST API Example in Github](https://github.com/h2oai/h2o-world-2015-training/tree/master/tutorials/pojo_webapp)
 
 ---
 
@@ -34,6 +35,8 @@ After the event concludes, please send questions to <h2ostream@googlegroups.com>
 #### Software Documentation
 
 * [H2O Slater Release Documentation](http://h2o-release.s3.amazonaws.com/h2o/rel-slater/1/index.html)
+* [H2O Slater Release Generated POJO Model Javadoc](http://h2o-release.s3.amazonaws.com/h2o/rel-slater/1/docs-website/h2o-genmodel/javadoc/index.html)
+
 
 #### Software Downloads
 
