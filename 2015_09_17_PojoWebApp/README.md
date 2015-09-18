@@ -16,7 +16,7 @@ Speakers: Tom Kraljevic
 
 ## Content
 
-* [Slides PDF](PojoWebApp_TK_2015_09_17.pptx.pdf)
+* [Slides PDF](PojoWebApp_TK_2015_09_17.pdf)
 * [Slides PPT](PojoWebApp_TK_2015_09_17.pptx)
 * [POJO REST API Example in Github](https://github.com/h2oai/h2o-world-2015-training/tree/master/tutorials/pojo_webapp)
 
