@@ -4,7 +4,7 @@
 
 ## Event Information
 
-Event: [Atlanta Big Data Science](http://www.meetup.com/Atlanta-Big-Data/events/219651141/)
+Event: [Silicon Valley Big Data Science]()
 
 Date: September 17, 2015
 
