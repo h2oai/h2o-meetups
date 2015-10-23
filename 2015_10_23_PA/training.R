@@ -1,3 +1,5 @@
+# Available at http://bit.ly/1LrCF1I
+
 # load h2o library
 library(h2o)
 # connect to local h2o or start new
@@ -161,3 +163,44 @@ h2o.download_pojo(airlines.glm, path="/Users/hank/x", getjar=TRUE)
 
 # Logs (for debugging)
 h2o.downloadAllLogs(dirname="/Users/hank/x/",filename="h2ologs.zip")
+
+###########################
+# GBM
+###########################
+
+iris.hex
+
+iris.gbm <- h2o.gbm(y=1, x=2:5, training_frame = iris.hex, n_trees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="gaussian")
+summary(iris.gbm)
+iris.gbm@model$scoring_history
+
+iris.gbm2 <- h2o.gbm(y=5, x=1:4, training_frame = iris.hex, ntrees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="multinomial")
+summary(iris.gbm2)
+iris.gbm2@model$training_metrics
+
+#######
+# Kmeans
+#######
+iris.kmeans = h2o.kmeans(training_frame = iris.hex, k=3, x=1:4)
+
+####
+# Pr Comp
+####
+ausPath = system.file("extdata", "australia.csv", package="h2o")
+australia.hex = h2o.importFile(path = ausPath)
+australia.pca = h2o.prcomp(training_frame = australia.hex, transform = "STANDARDIZE", k=3)
+summary(australia.pca)
+
+australia.reduced = predict(australia.pca, australia.hex)
+
+######
+# Grid search
+######
+ntrees_opt <- list(5,10,15)
+maxdepth_opt <- list(2,3,4)
+learnrate_opt <- list(0.1,0.2)
+hyper_parameters <- list(ntrees=ntrees_opt, max_depth=maxdepth_opt, learn_rate=learnrate_opt)
+
+grid <- h2o.grid("gbm", hyper_params = hyper_parameters, y = Y, x = X, distribution="bernoulli", training_frame = airlines.train, validation_frame = airlines.valid)
+
+grid
