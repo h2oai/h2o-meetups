@@ -170,19 +170,19 @@ h2o.downloadAllLogs(dirname="/Users/hank/x/",filename="h2ologs.zip")
 
 iris.hex
 
-iris.gbm <- h2o.gbm(y=1, x=2:5, training_frame = iris.hex, n_trees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="gaussian")
+iris.gbm <- h2o.gbm(y=1, x=2:5, training_frame = iris.hex, ntrees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="gaussian", model_id="iris.gbm.1")
 summary(iris.gbm)
 iris.gbm@model$scoring_history
 
-iris.gbm2 <- h2o.gbm(y=5, x=1:4, training_frame = iris.hex, ntrees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="multinomial")
+iris.gbm2 <- h2o.gbm(y=5, x=1:4, training_frame = iris.hex, ntrees=10, max_depth=3, min_rows=2, learn_rate=0.2, distribution="multinomial", nfolds = 5, model_id="iris.gbm.2")
 summary(iris.gbm2)
 iris.gbm2@model$training_metrics
-
+iris.gbm2@model$cross_validation_models[[1]]
 #######
 # Kmeans
 #######
 iris.kmeans = h2o.kmeans(training_frame = iris.hex, k=3, x=1:4)
-
+summary(iris.kmeans)
 ####
 # Pr Comp
 ####
@@ -196,11 +196,13 @@ australia.reduced = predict(australia.pca, australia.hex)
 ######
 # Grid search
 ######
-ntrees_opt <- list(5,10,15)
-maxdepth_opt <- list(2,3,4)
-learnrate_opt <- list(0.1,0.2)
+ntrees_opt <- c(5,10,15)
+maxdepth_opt <- c(2,3,4)
+learnrate_opt <- c(0.1,0.2)
 hyper_parameters <- list(ntrees=ntrees_opt, max_depth=maxdepth_opt, learn_rate=learnrate_opt)
 
-grid <- h2o.grid("gbm", hyper_params = hyper_parameters, y = Y, x = X, distribution="bernoulli", training_frame = airlines.train, validation_frame = airlines.valid)
+grid <- h2o.grid("gbm", hyper_params = hyper_parameters, y = Y, x = X, training_frame = airlines.train, validation_frame = airlines.valid) # This should work but has an error, does not produce 18 models
 
 grid
+
+topModel = h2o.getModel(grid@model_ids[[1]])
