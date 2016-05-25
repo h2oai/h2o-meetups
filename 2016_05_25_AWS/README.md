@@ -27,3 +27,5 @@ In this talk we will demonstrate the following applications of H2O and Amazon AW
 
 2) Develop a machine learning application with the tandem use of H2O and AWS Lambda, a compute service that runs code – A Lambda function – on demand. AWS Lambda simplifies the process of running code in the cloud by managing compute resource automatically.
 
+3) Showcase the use of H2O Sparkling Water within Amazon EMR (Elastic MapReduce), a web service that makes it easy to quickly and cost-effectively process vast amounts of data. Amazon EMR simplifies big data processing, providing a managed Hadoop framework that makes it easy, fast, and cost-effective for you to distribute and process vast amounts of your data across dynamically scalable Amazon EC2 instances.
+
