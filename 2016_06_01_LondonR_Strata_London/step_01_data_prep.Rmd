@@ -1,0 +1,70 @@
+---
+title: "LondonR Demo - Step 1: Data Preparation"
+author: "Jo-fai (Joe) Chow"
+date: "1 June 2016"
+output: 
+  html_document: 
+    fig_height: 9
+    fig_width: 14
+    theme: spacelab
+---
+
+<br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Import and Reformat Data
+
+```{r}
+# Script for loading data and basic feature engineering
+# See the script for more details
+source("step_01_data_prep.R")
+```
+
+<br>
+
+
+
+## Raw Target (y)
+
+```{r}
+summary(as.factor(d_train$OutcomeType))
+```
+
+<br>
+
+
+
+## Raw Predictors (x)
+
+```{r}
+str(d_train[, -which(colnames(d_train) %in% c("ID", "OutcomeType", "OutcomeSubtype"))])
+summary(d_train[, -which(colnames(d_train) %in% c("ID", "OutcomeType", "OutcomeSubtype"))])
+```
+
+<br>
+
+
+
+## Reformatted Predictors (x_new)
+
+```{r}
+str(x_ftr_train[, -which(colnames(x_ftr_train) %in% "ID")])
+summary(x_ftr_train[, -which(colnames(x_ftr_train) %in% "ID")])
+```
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
