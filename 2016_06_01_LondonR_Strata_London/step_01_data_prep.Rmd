@@ -60,7 +60,14 @@ summary(x_ftr_train[, -which(colnames(x_ftr_train) %in% "ID")])
 
 
 
+## Session and System Info
 
+```{r}
+sessionInfo()
+Sys.info()
+```
+
+<br>
 
 
 
