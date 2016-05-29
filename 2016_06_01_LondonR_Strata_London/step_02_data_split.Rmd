@@ -1,0 +1,83 @@
+---
+title: "LondonR Demo - Step 2: Split Data into Training/Validation"
+author: "Jo-fai (Joe) Chow"
+date: "1 June 2016"
+output: 
+  html_document: 
+    fig_height: 9
+    fig_width: 14
+    theme: spacelab
+---
+
+<br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Split Data
+
+```{r}
+# Script for splitting data
+# 6-fold (i.e. 1 to 5 = training set, 6 = validation set)
+# Stratified sampling based on target 
+source("step_02_data_split.R")
+```
+
+<br>
+
+
+
+## Raw Target (y)
+
+```{r}
+smry_target_raw <- data.frame(table(y_train$OutcomeType))
+smry_target_raw$Percentage <- smry_target_raw$Freq / length(y_train$OutcomeType)
+smry_target_raw$Percentage <- round(smry_target_raw$Percentage, 4)
+print(smry_target_raw)
+```
+
+<br>
+
+
+
+
+## Target by Fold
+
+```{r}
+for (n_fold in 1:6) {
+  cat("Summary of fold", n_fold, "\n")
+  smry_target_fold <- data.frame(table(y_train[which(y_train$fold == n_fold),]$OutcomeType))
+  smry_target_fold$Percentage <- smry_target_fold$Freq / length(y_train[which(y_train$fold == n_fold),]$OutcomeType)
+  smry_target_fold$Percentage <- round(smry_target_fold$Percentage, 4)
+  print(smry_target_fold)
+  cat("\n")
+}
+```
+
+<br>
+
+
+
+
+
+
+
+
+
+## Session and System Info
+
+```{r}
+sessionInfo()
+Sys.info()
+```
+
+<br>
+
+
+
+
+
+
+
