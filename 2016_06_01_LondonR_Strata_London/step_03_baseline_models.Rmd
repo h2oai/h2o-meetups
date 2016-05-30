@@ -1,0 +1,44 @@
+---
+title: "LondonR Demo - Step 3: Evaluate Baseline Models"
+author: "Jo-fai (Joe) Chow"
+date: "1 June 2016"
+output: 
+  html_document: 
+    fig_height: 9
+    fig_width: 14
+    theme: spacelab
+---
+
+<br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Load Evaluation Results
+
+```{r}
+# see step_03_baseline_models.R for 
+# models used: basic Random Forest, xgboost and their average
+load("step_03_results.rda")
+summary(d_eval[, -1])
+```
+
+<br>
+
+## Session and System Info
+
+```{r}
+sessionInfo()
+Sys.info()
+```
+
+<br>
+
+
+
+
+
+
+
