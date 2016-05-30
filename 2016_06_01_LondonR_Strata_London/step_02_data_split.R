@@ -17,9 +17,9 @@ source("step_01_data_prep.R")
 # Split training data into training and validation (80:20)
 # ------------------------------------------------------------------------------
 
-## Create 6-fold (1:5 = training, 6 = validation)
+## Create 5-fold (1:4 = training, 5 = validation)
 set.seed(1234)
-max_fold <- 6
+max_fold <- 5
 fold <- createFolds(y = y_train$OutcomeType, k = max_fold)
 
 ## Add a new df to store fold info

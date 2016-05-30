@@ -126,7 +126,7 @@ $(document).ready(function () {
 <div id="split-data" class="section level2">
 <h2>Split Data</h2>
 <pre class="r"><code># Script for splitting data
-# 6-fold (i.e. 1 to 5 = training set, 6 = validation set)
+# 5-fold (i.e. 1 to 4 = training set, 5 = validation set)
 # Stratified sampling based on target 
 source(&quot;step_02_data_split.R&quot;)</code></pre>
 <p><br></p>
@@ -147,7 +147,7 @@ print(smry_target_raw)</code></pre>
 </div>
 <div id="target-by-fold" class="section level2">
 <h2>Target by Fold</h2>
-<pre class="r"><code>for (n_fold in 1:6) {
+<pre class="r"><code>for (n_fold in 1:5) {
   cat(&quot;Summary of fold&quot;, n_fold, &quot;\n&quot;)
   smry_target_fold &lt;- data.frame(table(y_train[which(y_train$fold == n_fold),]$OutcomeType))
   smry_target_fold$Percentage &lt;- smry_target_fold$Freq / length(y_train[which(y_train$fold == n_fold),]$OutcomeType)
@@ -157,51 +157,43 @@ print(smry_target_raw)</code></pre>
 }</code></pre>
 <pre><code>## Summary of fold 1 
 ##              Var1 Freq Percentage
-## 1        Adoption 1795     0.4029
-## 2            Died   33     0.0074
-## 3      Euthanasia  259     0.0581
-## 4 Return_to_owner  798     0.1791
-## 5        Transfer 1570     0.3524
+## 1        Adoption 2154     0.4028
+## 2            Died   40     0.0075
+## 3      Euthanasia  311     0.0582
+## 4 Return_to_owner  957     0.1790
+## 5        Transfer 1885     0.3525
 ## 
 ## Summary of fold 2 
 ##              Var1 Freq Percentage
-## 1        Adoption 1795     0.4029
-## 2            Died   33     0.0074
-## 3      Euthanasia  259     0.0581
-## 4 Return_to_owner  797     0.1789
-## 5        Transfer 1571     0.3526
+## 1        Adoption 2154     0.4030
+## 2            Died   39     0.0073
+## 3      Euthanasia  311     0.0582
+## 4 Return_to_owner  957     0.1790
+## 5        Transfer 1884     0.3525
 ## 
 ## Summary of fold 3 
 ##              Var1 Freq Percentage
-## 1        Adoption 1795     0.4030
-## 2            Died   33     0.0074
-## 3      Euthanasia  259     0.0581
-## 4 Return_to_owner  797     0.1789
-## 5        Transfer 1570     0.3525
+## 1        Adoption 2154     0.4028
+## 2            Died   40     0.0075
+## 3      Euthanasia  311     0.0582
+## 4 Return_to_owner  957     0.1790
+## 5        Transfer 1885     0.3525
 ## 
 ## Summary of fold 4 
 ##              Var1 Freq Percentage
-## 1        Adoption 1795     0.4029
-## 2            Died   33     0.0074
-## 3      Euthanasia  259     0.0581
-## 4 Return_to_owner  798     0.1791
-## 5        Transfer 1570     0.3524
+## 1        Adoption 2154     0.4030
+## 2            Died   39     0.0073
+## 3      Euthanasia  311     0.0582
+## 4 Return_to_owner  957     0.1790
+## 5        Transfer 1884     0.3525
 ## 
 ## Summary of fold 5 
 ##              Var1 Freq Percentage
-## 1        Adoption 1795     0.4029
-## 2            Died   33     0.0074
-## 3      Euthanasia  260     0.0584
-## 4 Return_to_owner  797     0.1789
-## 5        Transfer 1570     0.3524
-## 
-## Summary of fold 6 
-##              Var1 Freq Percentage
-## 1        Adoption 1794     0.4028
-## 2            Died   32     0.0072
-## 3      Euthanasia  259     0.0581
-## 4 Return_to_owner  798     0.1792
-## 5        Transfer 1571     0.3527</code></pre>
+## 1        Adoption 2153     0.4029
+## 2            Died   39     0.0073
+## 3      Euthanasia  311     0.0582
+## 4 Return_to_owner  957     0.1791
+## 5        Transfer 1884     0.3525</code></pre>
 <p><br></p>
 </div>
 <div id="session-and-system-info" class="section level2">

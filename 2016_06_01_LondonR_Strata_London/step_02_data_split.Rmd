@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 # Script for splitting data
-# 6-fold (i.e. 1 to 5 = training set, 6 = validation set)
+# 5-fold (i.e. 1 to 4 = training set, 5 = validation set)
 # Stratified sampling based on target 
 source("step_02_data_split.R")
 ```
@@ -46,7 +46,7 @@ print(smry_target_raw)
 ## Target by Fold
 
 ```{r}
-for (n_fold in 1:6) {
+for (n_fold in 1:5) {
   cat("Summary of fold", n_fold, "\n")
   smry_target_fold <- data.frame(table(y_train[which(y_train$fold == n_fold),]$OutcomeType))
   smry_target_fold$Percentage <- smry_target_fold$Freq / length(y_train[which(y_train$fold == n_fold),]$OutcomeType)
