@@ -7,7 +7,6 @@
 
 suppressPackageStartupMessages(library(randomForest))
 suppressPackageStartupMessages(library(xgboost))
-suppressPackageStartupMessages(library(MLmetrics))
 suppressPackageStartupMessages(library(foreach))
 suppressPackageStartupMessages(library(doParallel))
 
@@ -17,6 +16,19 @@ suppressPackageStartupMessages(library(doParallel))
 
 source("step_01_data_prep.R")
 source("step_02_data_split.R")
+
+# ------------------------------------------------------------------------------
+# Custom Functions
+# ------------------------------------------------------------------------------
+
+# Multi-class Log Loss
+# https://www.kaggle.com/c/predict-closed-questions-on-stack-overflow/forums/t/2421/multiclass-logloss-in-r/72939
+mlogloss <- function(actual, predicted, eps=1e-15) {
+  predicted[predicted < eps] <- eps;
+  predicted[predicted > 1 - eps] <- 1 - eps;
+  -1/nrow(actual)*(sum(actual*log(predicted)))
+}
+
 
 # ------------------------------------------------------------------------------
 # Train and evaluate baseline Random Forest and xgboost models
@@ -53,7 +65,7 @@ eval_rf_xgb <- function(n_tree_rf, n_round_xgb, n_seed) {
   yhat_valid_rf <- predict(model_rf, x_ftr_train[which(x_ftr_train$fold == 5), fea_ftr], type = "prob")
 
   # Evaluate performance on validation set and store results
-  tmp_mll <- MultiLogLoss(y_train[which(y_train$fold == 5), 3:7], yhat_valid_rf)
+  tmp_mll <- mlogloss(y_train[which(y_train$fold == 5), 3:7], yhat_valid_rf)
 
   # Output
   output <- data.frame(seed = n_seed, mlogloss_rf = tmp_mll)
@@ -75,8 +87,8 @@ eval_rf_xgb <- function(n_tree_rf, n_round_xgb, n_seed) {
                   eval_metric         = "mlogloss",
                   eta                 = 0.05,
                   max_depth           = 8,
-                  subsample           = 0.75,
-                  colsample_bytree    = 0.75,
+                  subsample           = 0.5,
+                  colsample_bytree    = 0.5,
                   num_class           = 5,
                   nthread             = 1 # use single thread within the function
   )
@@ -90,7 +102,7 @@ eval_rf_xgb <- function(n_tree_rf, n_round_xgb, n_seed) {
   # Evaluate performance on validation set and store results
   yy_valid_xgb <- data.frame(matrix(predict(model_xgb, xgb_valid), ncol = 5, byrow = T))
   colnames(yy_valid_xgb) <- colnames(y_train)[c(3:7)]
-  output$mlogloss_xgb <- MultiLogLoss(y_train[which(y_train$fold == 5), 3:7], yy_valid_xgb)
+  output$mlogloss_xgb <- mlogloss(y_train[which(y_train$fold == 5), 3:7], yy_valid_xgb)
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -105,7 +117,7 @@ eval_rf_xgb <- function(n_tree_rf, n_round_xgb, n_seed) {
   yy_valid_avg_norm <- t(apply(yy_valid_avg, 1, norm_yy))
 
   # Evaluate performance on validation set and store results
-  output$mlogloss_avg <- MultiLogLoss(y_train[which(y_train$fold == 5), 3:7], yy_valid_avg_norm)
+  output$mlogloss_avg <- mlogloss(y_train[which(y_train$fold == 5), 3:7], yy_valid_avg_norm)
 
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,12 +129,12 @@ eval_rf_xgb <- function(n_tree_rf, n_round_xgb, n_seed) {
 }
 
 # Register parallel backend
-cl <- makePSOCKcluster(detectCores()-1) # try not to use all threads
+cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 # Train and evaluate baseline Random Forest (50 trees) in parallel mode
 d_eval <- foreach(n_seed = 1:max_round, .combine = rbind,
-                  .multicombine = TRUE,
+                  .multicombine = TRUE, .inorder = FALSE,
                   .packages = c("randomForest", "MLmetrics", "xgboost")) %dopar%
   eval_rf_xgb(n_tree_rf, n_round_xgb, n_seed)
 
@@ -134,5 +146,4 @@ save(d_eval, file = "step_03_results.rda")
 
 # Print
 print(d_eval)
-
 
