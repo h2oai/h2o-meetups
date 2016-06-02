@@ -20,11 +20,12 @@ Across business and research, analysts seek to understand large collections of d
 
 Jo-fai Chow describes offers an overview of low-rank models and demonstrates how to build them in H2O, an open source distributed machine-learning platform. Through examples, Jo-fai explains how to fit low-rank models to numeric and categorical datasets with missing values and how to use these models to identify important features and make better predictions.
 
-Topics include:
+### Slides
 
-- Imputing missing data entries
-- Compressing features into essential archetypes
-- Reducing high-cardinality categorical data into numeric columns
-- Visualizing results in R and Python
-- Integrating low-rank models into machine-learning pipelines
+- [PowerPoint](https://github.com/h2oai/h2o-meetups/blob/master/2016_06_02_Strata_Hadoop_London/2016_06_02_GLRM_Strata_Hadoop_London.pptx?raw=true)
+- [PDF](https://github.com/h2oai/h2o-meetups/raw/master/2016_06_02_Strata_Hadoop_London/2016_06_02_GLRM_Strata_Hadoop_London.pdf)
+
+### Code
+
+See example_01 to _04.R
 
