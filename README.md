@@ -11,5 +11,6 @@
 ### [New York City (July 19-20, 2016)](http://open.h2o.ai/nyc.html)
 * [Sparkling Water 2.0 Preview](2016_07_19_H2O_Open_Tour_NYC_SW)
 * [Ways to Productionize H2O](2016_07_19_H2O_Open_Tour_NYC_Prod)
+* [Deep learning panel](2016_07_19_H2O_Open_Tour_NYC_DL)
 
 ---
