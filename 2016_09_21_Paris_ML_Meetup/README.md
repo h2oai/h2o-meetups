@@ -22,6 +22,15 @@ Speakers: Jo-fai (Joe) Chow and Jakub (Kuba) Háva
 - Sparkling Water 2.0 (Kuba)
 
 
+### Software 
 
+- H2O (3.10.0.6) ([Link](http://www.h2o.ai/download/h2o/choose))
+- R 3.3.1 ([Link](T.B.C.))
+- Spark 1.6.2 ([Link](T.B.C.))
+- Sparkling Water 1.6.6 ([Link](http://h2o-release.s3.amazonaws.com/sparkling-water/rel-1.6/6/index.html))
+- mxnet 0.7 ([Link](T.B.C.))
+- TensorFlow 0.10.0 ([Link](T.B.C.))
+- CUDA 8.0rc ([Link](T.B.C.))
+- cuDNN 5.1.5 ([Link](T.B.C.))
 
 
