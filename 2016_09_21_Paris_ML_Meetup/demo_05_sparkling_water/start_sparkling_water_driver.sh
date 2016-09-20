@@ -1,0 +1,1 @@
+$SPARK_HOME/bin/spark-submit --class water.SparklingWaterDriver --packages ai.h2o:sparkling-water-examples_2.10:1.6.7 --executor-memory=3g  /dev/null
