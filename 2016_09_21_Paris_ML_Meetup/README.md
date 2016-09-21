@@ -12,25 +12,24 @@ Place: Murex, 43 rue vineuse, Paris ([map](https://maps.google.com/maps?f=q&hl=e
 
 Speakers: Jo-fai (Joe) Chow and Jakub (Kuba) Háva
 
-
 ---
 
 ### Content
 
-- Introduction to Machine Learning with H2O (Joe) ([Slides](2016_09_21_Paris_ML_Talk_1_Introduction.pptx))
+- Introduction to Machine Learning with H2O (Joe)
 - Project "Deep Water" (Joe)
 - Sparkling Water 2.0 (Kuba)
 
 
-### Software 
+### Software Used for Demos
 
-- H2O (3.10.0.6) ([Link](http://www.h2o.ai/download/h2o/choose))
-- R 3.3.1 ([Link](T.B.C.))
-- Spark 1.6.2 ([Link](T.B.C.))
+- H2O (3.10.0.6+) ([Link](http://www.h2o.ai/download/h2o/choose))
+- R 3.3.1 ([Link](https://cran.r-project.org/))
+- Spark 1.6.2 ([Link](http://spark.apache.org/downloads.html))
 - Sparkling Water 1.6.6 ([Link](http://h2o-release.s3.amazonaws.com/sparkling-water/rel-1.6/6/index.html))
-- mxnet 0.7 ([Link](T.B.C.))
-- TensorFlow 0.10.0 ([Link](T.B.C.))
-- CUDA 8.0rc ([Link](T.B.C.))
-- cuDNN 5.1.5 ([Link](T.B.C.))
+- mxnet 0.7 ([Link](http://mxnet.io/))
+- TensorFlow 0.10.0 ([Link](https://www.tensorflow.org/))
+- CUDA 8.0rc ([Link](https://developer.nvidia.com/cuda-toolkit))
+- cuDNN 5.1.5 ([Link](https://developer.nvidia.com/cudnn))
 
 
