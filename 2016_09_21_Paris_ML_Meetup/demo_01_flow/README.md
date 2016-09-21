@@ -1,8 +1,5 @@
 # H2O Flow (Web Interface) Demo
 
-(draft version 0.1)
-
-
 <br><hr><br>
 
 ## Introduction
@@ -78,6 +75,12 @@ You can also open and look at `Paris_ML_Meetup_Demo_1.flow` for reference.
 
 The above four tasks will give you a taste of the basics. Now it is your time to
 try different settings / models / workflow. 
+
+For example:
+
+- `Model` -> `Deep Learning`
+- `Data` -> `Upload File`
+- `Flow` -> `Save Flow`
 
 <br><hr><br>
 
