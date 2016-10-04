@@ -2,6 +2,7 @@
 
 ---
 ## [Trump and the Art of Machine Learning!](http://www.meetup.com//Silicon-Valley-Big-Data-Science/events/234342356/?showDescription=true)
+October 6, 2016, H2O Main Office, Mountain View
 * []
 * []
 
