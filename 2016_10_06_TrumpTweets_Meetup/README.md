@@ -13,7 +13,8 @@ October 6, 2016, H2O Main Office, Mountain View
   - Question: Classify the tweet from either Hillary or Trump
   - Question: Check If a tweet will be responded by Trump
 - Building & deploying machine learning applications
-  - Export POJO model from above classification exercise
-  - Build Java application using POJO
+  - Export models from above classification exercise and build Java application using POJO
+ 
+
   
 
