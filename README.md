@@ -1,6 +1,9 @@
 # Information from H2O Meetups and Presentations
 
 ---
+## [Trump and the Art of Machine Learning!](http://www.meetup.com//Silicon-Valley-Big-Data-Science/events/234342356/?showDescription=true)
+* []
+* []
 
 ## [H2O Open Tour 2016](http://open.h2o.ai)
 
