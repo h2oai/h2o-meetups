@@ -12,7 +12,7 @@ October 6, 2016, H2O Main Office, Mountain View
 - Binary Classification - Wen, Surekha, Avni
   - Question: Classify the tweet from either Hillary or Trump
   - Question: Check If a tweet will be responded by Trump
-- Building & deploying machine learning applications
+- Building & deploying machine learning applications - Avkash
   - Export models from above classification exercise and build Java application using POJO
  
 
