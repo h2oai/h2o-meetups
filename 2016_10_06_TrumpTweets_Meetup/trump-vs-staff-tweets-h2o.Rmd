@@ -1,0 +1,121 @@
+---
+title: "Trump vs Staff Tweets with H2O"
+author: "Erin LeDell"
+date: "10/3/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# This is a work in progress... Check back on 10/6/2016 for final version!
+
+
+
+## Source
+
+This is an adaptation of David Robinson's popular [sentiment analysis of Trumps tweets](http://varianceexplained.org/r/trump-tweets/).
+
+
+
+## The dataset
+
+
+```{r load}
+#install.packages(c("dplyr", "purrr", "twitteR", "tidyr", "lubridate", "scales", "ggplot2", "tidytext"))
+library(dplyr, quietly = TRUE)
+library(purrr, quietly = TRUE)
+#library(twitteR)
+```
+
+```{r}
+load(url("http://varianceexplained.org/files/trump_tweets_df.rda"))
+str(trump_tweets_df)
+```
+
+
+## Munge the data
+
+It is known that Trump uses an Android device and his staff seems to typically tweet from an iPhone.  Therefore, this metatdata serves as an author identifier. 
+
+Here we extract the terms, "iPhone" and "Android" frin the `statusSource` column:
+
+```{r}
+library(tidyr)
+
+tweets <- trump_tweets_df %>%
+  select(id, statusSource, text, created) %>%
+  extract(statusSource, "source", "Twitter for (.*?)<") %>%
+  filter(source %in% c("iPhone", "Android"))
+
+table(tweets$source)
+```
+
+### Remove stopwords
+
+Use the tidytext package to clean up the text a bit:
+
+```{r}
+library(stringr)
+library(tidytext)
+
+reg <- "([^A-Za-z\\d#@']|'(?![A-Za-z\\d#@]))"
+tweet_words <- tweets %>%
+  filter(!str_detect(text, '^"')) %>%
+  mutate(text = str_replace_all(text, "https://t.co/[A-Za-z\\d]+|&amp;", "")) %>%
+  unnest_tokens(word, text, token = "regex", pattern = reg) %>%
+  filter(!word %in% stop_words$word,
+         str_detect(word, "[a-z]"))
+
+tweet_words
+```
+
+
+### Wordclouds!
+
+```{r}
+library(wordcloud)
+
+tweet_words %>%
+  count(word) %>%
+  with(wordcloud(word, n, max.words = 100))
+```
+
+
+
+
+### Term-Frequency Inverse Document Frequency (TF-IDF)
+
+Here we'll create a Document-Term Matrix (DTM) to prepare the data for training an classifier.  The code is borrowed and adapted from the excellent tutorial, ["Term Frequency and Inverse Document Frequency (tf-idf) Using Tidy Data Principles"](https://cran.r-project.org/web/packages/tidytext/vignettes/tf_idf.html) by Julia Silge and David Robinson.
+
+TO DO: Implement TF-IDF using dplyr-on-Spark using the sparklyr package
+
+TO DO: Possibly also add Spark's TF-IDF if we can expose it via R...
+
+
+
+### sparklyr interface
+
+TO DO: Next we will convert the Spark DataFrame to an H2O Frame so that we can perform a binary classification in H2O.
+
+
+
+### Plot tweet frequencies
+
+```{r}
+library(lubridate, quietly = TRUE)
+library(scales, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
+
+tweets %>%
+  count(source, hour = hour(with_tz(created, "EST"))) %>%
+  mutate(percent = n / sum(n)) %>%
+  ggplot(aes(hour, percent, color = source)) +
+  geom_line() +
+  scale_y_continuous(labels = percent_format()) +
+  labs(x = "Hour of day (EST)",
+       y = "% of tweets",
+       color = "")
+```
+
