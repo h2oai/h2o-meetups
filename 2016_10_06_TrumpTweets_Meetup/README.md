@@ -14,6 +14,6 @@ October 6, 2016, H2O Main Office, Mountain View
   - Question: Check If a tweet will be responded by Trump
 - Building & deploying machine learning applications
   - Export POJO model from above classification exercise
-  - Build Java application usin POJO
+  - Build Java application using POJO
   
 
