@@ -1,5 +1,7 @@
 # Information from H2O Meetups and Presentations
 
+[![Join the chat at https://gitter.im/h2oai/h2o-meetups](https://badges.gitter.im/h2oai/h2o-meetups.svg)](https://gitter.im/h2oai/h2o-meetups?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Next meetup: Trump and the Art of Machine Learning!
 
 October 6, 2016, H2O Main Office, Mountain View
