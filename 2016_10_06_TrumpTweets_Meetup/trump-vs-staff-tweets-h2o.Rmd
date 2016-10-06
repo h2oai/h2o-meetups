@@ -19,36 +19,45 @@ This is an adaptation of David Robinson's popular [sentiment analysis of Trumps 
 
 
 
-## The dataset
+## The Trump Tweets dataset
 
-
-```{r load}
-#install.packages(c("dplyr", "purrr", "twitteR", "tidyr", "lubridate", "scales", "ggplot2", "tidytext"))
-library(dplyr, quietly = TRUE)
-library(purrr, quietly = TRUE)
-#library(twitteR)
-```
-
+The tweets were acquired by David Robinson using the [twitteR](https://cran.r-project.org/web/packages/twitteR/index.html) package and the Twitter API, but for convenience, he has provided the data here:
 ```{r}
 load(url("http://varianceexplained.org/files/trump_tweets_df.rda"))
 str(trump_tweets_df)
 ```
 
+We observe that there are 1512 tweets (rows) and 16 variables.
+
 
 ## Munge the data
 
-It is known that Trump uses an Android device and his staff seems to typically tweet from an iPhone.  Therefore, this metatdata serves as an author identifier. 
 
-Here we extract the terms, "iPhone" and "Android" frin the `statusSource` column:
+It is known that Trump uses an Android device and it appears as if his staff typically tweets from an iPhone.  Therefore, this metatdata serves as an author identifier. 
+
+Here we extract the terms, "iPhone" and "Android" from the `statusSource` column:
 
 ```{r}
+#install.packages(c("dplyr", "purrr", "twitteR", "tidyr", "lubridate", "scales", "ggplot2", "tidytext"))
+#library(dplyr, warn.conflicts = FALSE)
+library(dplyr)
+library(purrr)
 library(tidyr)
+```
 
+We will create a new, simplified, data frame called `tweets` with the following columsn: "id", "source", "text" and "created".  The "source" column contains just the terms, "iPhone" and "Android". 
+
+```{r}
 tweets <- trump_tweets_df %>%
   select(id, statusSource, text, created) %>%
   extract(statusSource, "source", "Twitter for (.*?)<") %>%
   filter(source %in% c("iPhone", "Android"))
+```
 
+In the new data frame, there are only 1390 tweets since we filtered to only rows which contained a source (Android vs iPhone).  Using the `table()` function, we can easily count the number of tweets from Android vs iPhone:
+
+```{r}
+dim(tweets)
 table(tweets$source)
 ```
 
@@ -75,38 +84,222 @@ tweet_words
 ### Wordclouds!
 
 ```{r}
-library(wordcloud)
+library(wordcloud, quietly = TRUE)
 
 tweet_words %>%
   count(word) %>%
-  with(wordcloud(word, n, max.words = 100))
+  with(wordcloud(word, n, max.words = 100, color = "gray"))
 ```
 
 
 
 
-### Term-Frequency Inverse Document Frequency (TF-IDF)
+### Term-Frequency Inverse Document Frequency (tf-idf)
 
-Here we'll create a Document-Term Matrix (DTM) to prepare the data for training an classifier.  The code is borrowed and adapted from the excellent tutorial, ["Term Frequency and Inverse Document Frequency (tf-idf) Using Tidy Data Principles"](https://cran.r-project.org/web/packages/tidytext/vignettes/tf_idf.html) by Julia Silge and David Robinson.
+Here we'll create a [Document-Term Matrix (DTM)](https://en.wikipedia.org/wiki/Document-term_matrix) to prepare the data for training an classifier.  In a document-term matrix, rows correspond to documents in the collection and columns correspond to terms. There are various schemes for determining the value that each entry in the matrix should take. One such scheme is [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
 
-TO DO: Implement TF-IDF using dplyr-on-Spark using the sparklyr package
+The TF-IDF code is borrowed from the excellent tutorial, ["Term Frequency and Inverse Document Frequency (tf-idf) Using Tidy Data Principles"](https://cran.r-project.org/web/packages/tidytext/vignettes/tf_idf.html) by Julia Silge and David Robinson.
 
-TO DO: Possibly also add Spark's TF-IDF if we can expose it via R...
+#### What is tf-idf?
 
+Tf-idf stands for "term frequency-inverse document frequency", and the "tf-idf weight"" is a weight often used in information retrieval and text mining. This weight is a statistical measure used to evaluate how important a word is to a document in a collection or corpus.
 
+Typically, the tf-idf weight is composed by two terms: the first computes the normalized Term Frequency (TF), aka. the number of times a word appears in a document, divided by the total number of words in that document; the second term is the Inverse Document Frequency (IDF), computed as the logarithm of the number of the documents in the corpus divided by the number of documents where the specific term appears.
 
-### sparklyr interface
+- TF: Term Frequency, which measures how frequently a term occurs in a document. Since every document is different in length, it is possible that a term would appear much more times in long documents than shorter ones. Thus, the term frequency is often divided by the document length (aka. the total number of terms in the document) as a way of normalization:
 
-TO DO: Next we will convert the Spark DataFrame to an H2O Frame so that we can perform a binary classification in H2O.
+```
+    TF(t) = (Number of times term t appears in a document) / (Total number of terms in the document)
+```
 
+- IDF: Inverse Document Frequency, which measures how important a term is. While computing TF, all terms are considered equally important. However it is known that certain terms, such as "is", "of", and "that", may appear a lot of times but have little importance. Thus we need to weigh down the frequent terms while scale up the rare ones, by computing the following:
 
+```
+    IDF(t) = log_e(Total number of documents / Number of documents with term t in it)
+```
 
-### Plot tweet frequencies
+#### Compute tf-idf weights
+
+The first step is counting the number of times that a word appears in a single document (in this case a "document" is a tweet).
 
 ```{r}
-library(lubridate, quietly = TRUE)
-library(scales, quietly = TRUE)
-library(ggplot2, quietly = TRUE)
+tweet_word_counts <- tweet_words[, c("word", "id")] %>% count(id, word)
+tweet_word_counts
+```
+
+
+Next, we will count the total number of words in each tweet.
+
+```{r}
+total_words <- tweet_word_counts %>% 
+  group_by(id) %>% 
+  summarize(total = sum(n))
+total_words
+```
+
+
+Join these two tables together as follows:
+
+```{r}
+tweet_word_counts <- left_join(tweet_word_counts, total_words)
+tweet_word_counts
+```
+
+Finally we can use the handy `bind_tf_idf()` function from the tidytext package to add the "tf", "idf" and "tf_idf" columns to the data frame.
+
+```{r}
+tweet_word_counts <- tweet_word_counts %>%
+  bind_tf_idf(word, id, n)
+tweet_word_counts
+```
+
+
+Let's sort by the words with the greatest TF-IDF value:
+
+```{r}
+tweet_word_counts %>%
+  select(-total) %>%
+  arrange(desc(tf_idf))
+```
+
+
+#### Document-term Matrix
+
+Now that we have the tf-idf weights computed, we can create the document-term matrix.  This matrix becomes the training data for our machine learning task.
+
+
+The `tidytext::cast_sparse()` function should work here, but we get an error.  
+
+```{r}
+#dtm <- cast_sparse_(tweet_word_counts, id, word, tf_idf)
+```
+
+So while we are waiting for that bug to be fixed, we can just create our own document-term matrix function that produces an H2O Frame.
+
+
+```{r}
+cast_dtm_h2o <- function(data, row_col, column_col, value_col = 1, sparse = FALSE) {
+  # This function is a modified version of tidytext::cast_sparse_
+  
+  # ungroup the data
+  data <- ungroup(data)
+  data <- distinct_(data, row_col, column_col, .keep_all = TRUE)
+  row_names <- data[[row_col]]
+  col_names <- data[[column_col]]
+  if (is.numeric(value_col)) {
+    values <- value_col
+  } else {
+    values <- data[[value_col]]
+  }
+
+  # if it's a factor, preserve ordering
+  if (is.factor(row_names)) {
+    row_u <- levels(row_names)
+    i <- as.integer(row_names)
+  } else {
+    row_u <- unique(row_names)
+    i <- match(row_names, row_u)
+  }
+  
+  if (is.factor(col_names)) {
+    col_u <- levels(col_names)
+    j <- as.integer(col_names)
+  } else {
+    col_u <- unique(col_names)
+    j <- match(col_names, col_u)
+  }
+  
+  ret <- Matrix::sparseMatrix(i = i, j = j, x = values,
+                              dimnames = list(row_u, col_u))
+  
+  if (!sparse) {
+    # Convert the sparse matrix to an H2OFrame
+    ret <- as.h2o(as.matrix(ret))
+  }
+  ret
+}
+```
+
+
+```{r}
+# Load H2O and start up a local H2O cluster
+library(h2o)
+h2o.init(nthreads = -1)
+```
+
+
+Now that the H2O cluster is running, we can convert our data frame of tweets into a document-term H2O Frame.
+
+```{r}
+dtm <- cast_dtm_h2o(tweet_word_counts, "id", "word", "tf_idf")
+dim(dtm)
+```
+
+The last step in this data munging process is to append the response column (Android vs iPhone) to the training data frame, `dtm`.  
+
+The following will produce a data frame which contains just the 1172 unique ids that were in our `tweet_word_counts` frame, and their corresponding labels (Android vs iPhone).
+
+```{r}
+labels <- semi_join(tweets[,c("id", "source")], 
+                    tweet_word_counts[,c("id")],
+                    by = "id")
+```
+
+Lastly, we will column-bind the response column onto our training H2O Frame, `dtm`.
+
+```{r}
+dtm <- h2o.cbind(dtm, as.h2o(labels$source))
+names(dtm)[ncol(dtm)] <- "source"
+dim(dtm)
+```
+
+
+## Classify Tweets using H2O Machine Learning
+
+Now that we have completed the "data munging" phase, we are ready to do some machine learning.  Since we have a binary response column (Android vs iPhone), we will train a binary classification algorithm.
+
+
+### Generalized Linear Model (GLM)
+
+Let's start with a GLM.  We will use 5-fold cross-validation to evaluate the performance of our model.
+
+
+```{r}
+# Define the response variable and set of predictors
+y <- "source"
+x <- setdiff(names(dtm), y)
+
+glm_fit1 <- h2o.glm(x = x,
+                    y = y, 
+                    family = "binomial",
+                    training_frame = dtm,
+                    nfolds = 5)
+```
+
+We can look at all the H2O performance metrics by using the `h2o.performance()` function.
+
+```{r}
+h2o.performance(glm_fit1, xval = TRUE)
+```
+
+Since this is a binomial classification problem, we might be interested in evaluting the cross-validated AUC value:
+
+```{r}
+h2o.auc(glm_fit1, xval = TRUE)
+```
+
+By default, H2O chooses the classfication threshold that maximies the F1 score.  So if you are interested in inspecting the confusion matrix, keep that in mind.  The threshold can also be manually specified by the user.
+
+
+
+## Visualize Tweets
+
+We can extract the time that the Tweet was made from the "created" column using the [lubridate](https://cran.r-project.org/web/packages/lubridate/index.html) package.  This code snippet is taken right from David Robinson's original blog post.
+
+```{r}
+library(lubridate, warn.conflicts = FALSE)
+library(scales)
+library(ggplot2)
 
 tweets %>%
   count(source, hour = hour(with_tz(created, "EST"))) %>%
@@ -118,4 +311,14 @@ tweets %>%
        y = "% of tweets",
        color = "")
 ```
+
+
+
+### Advanced Topics: dplyr-on-Spark & rsparkling
+
+- TO DO: Implement TF-IDF using dplyr-on-Spark using the sparklyr package
+- TO DO: Add Spark's TF-IDF if we can expose it via R...
+- TO DO: Convert the Spark DataFrame to an H2O Frame so that we can perform a binary classification in H2O.
+
+
 
