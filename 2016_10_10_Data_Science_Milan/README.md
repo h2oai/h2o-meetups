@@ -17,13 +17,7 @@ Speaker: Jo-fai (Joe) Chow
 
 ### Content
 
-- Introduction to Machine Learning with H2O
-- H2O for IoT
-- Project “Deep Water"
-
-### Links
-
-- T.B.C.
-
-
+- Talk 1: Introduction to Machine Learning with H2O
+- Talk 2: H2O for IoT
+- Talk 3: Project “Deep Water"
 
