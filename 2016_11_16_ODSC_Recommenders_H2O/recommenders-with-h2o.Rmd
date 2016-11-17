@@ -1,0 +1,615 @@
+---
+title: "Recommenders with H2O"
+author: "Megan Kurka"
+date: "October 6, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+## Recommender Systems
+A Recommender System aims to suggest new items to users.  It does this by employing a model that automatically predicts how much a user will like an item.  This information can be used for personalized product recommendations, website personalization, and personalized loyalty programs and offers. 
+The data often used for a Recommender System is: 
+
+* User Behavior Data: what items did the user like in that past, what items did they not like
+* Item Features: attributes that describe the item - color, price, product hierarchy
+* User Features: attributes that describe the user - age, location, frequent buyer
+* Contextual Information: device used, current location, time
+
+## Types of Recommender Systems
+
+Recommender systems can be defined into three categories: 
+
+* Content Based Recommenders
+* Collaborative Filtering
+* Hybrid
+
+**Content Based Recommenders** aim to make recommendations for a user based on the item attributes and the user's preference of those attributes.  An example of this would be to recommend a user a Comedy movie because the user has a preference for comedies.
+
+**Collaborative Filtering** aims to make recommendations for a user based on what similar users like.  The algorithm will collect preferences from many users and use that to influence recommendations.  This is different from Content Based Recommender which does not use the behavior of other users to generate recommendations.  An example of this would be to recommend a movie to user A that user B liked since user A and user B have shown the same preferences in movies in the past.
+
+**Hybrid** combines the elements of Content Based Recommenders and Collaborative Filtering.  The idea is that both item attributes and similar users can be predictive for generating automatic recommendations.
+
+## Use Case
+
+### The Problem
+Generate 10 movie recommendations for each user.
+
+### The Data
+* 1 million user movies of ratings on a 1 - 5 scale.
+* Movie Features
+
+## The MovieLens dataset
+
+I will be using the MovieLens dataset for this introduction.  The dataset consists of 1 million user ratings of movies on a 1-5 scale. The data has ratings and movie features (genre, release date). 
+
+The movielens dataset was acquired from the [GroupLens](http://grouplens.org/datasets/movielens/) website.
+
+The datasets are: 
+
+* ratings: consists of userId, movieId, the rating, and the timestamp
+* movies: consists of movieId, title, and genres
+
+```{r eval = T, message = F, eval = TRUE}
+# Load H2O and start up a local H2O cluster
+library(h2o)
+h2o.init(nthreads = -1)
+```
+
+We can import these csv files using the `h2o.importFile` function.
+```{r eval = T, results='hide', eval = TRUE}
+# Import movie lens datasets
+
+# ratings file can be found here: http://grouplens.org/datasets/movielens/1m/
+
+ratings <- h2o.importFile("ml-1m/ratings.dat", sep = ":")
+ratings <- ratings[c(1, 3, 5, 7)]
+colnames(ratings) <- c("userId", "movieId", "rating", "timestamp")
+
+# movies file can be found here: http://grouplens.org/datasets/movielens/20m/
+
+movies <- h2o.importFile("ml-20m/movies.csv", sep = ",")
+```
+
+There are 1 million ratings (rows) and 6 variables.
+
+```{r eval = TRUE, echo = FALSE, results="asis"}
+library('pander')
+sub_ratings <- as.data.frame(ratings[c(1:5), ])
+pandoc.table(sub_ratings, style = "rmarkdown", caption = "Ratings Dataset")
+sub_movies <- as.data.frame(movies[c(1:5), ])
+sub_movies$genres <- gsub("\\|", ",", sub_movies$genres)
+pandoc.table(sub_movies, style = "rmarkdown", caption = "Movies Dataset")
+```
+
+
+### Data Exploration
+
+Before we start the analysis, we will do some cursory analysis of the data.
+
+First we will take a look at the distribution of ratings.  
+```{r eval = T, message = F, eval = TRUE}
+h2o.hist(ratings$rating, breaks = seq(0, 5, 1))
+```
+
+From the histogram, it looks like most people generally like the movies they rate.  The most common rating is between 3 and 4 (out of 5).
+
+We will also look at the number of ratings each movie recieves.
+```{r eval = T, message = F, eval = TRUE}
+## Group Data by movieId
+ratings_per_movie <- h2o.group_by(ratings, by = "movieId", nrow("rating"))
+colnames(ratings_per_movie)[[2]] <- "numberRatings"
+## Generate histogram
+h2o.hist(ratings_per_movie$numberRatings, breaks = seq(0, 70000, 1000))
+```
+
+There are some movies with about 70,000 ratings, however, the vast majority of movies have 1,000 ratings or less. 
+Taking a look at the quantile distribution of the number of ratings, we see that the median number of ratings is 18.  This tells us that the majority of movies in the dataset are relatively obscure with a few that are hugely popular.
+
+```{r eval = T, message = F, eval = TRUE}
+h2o.quantile(ratings_per_movie$numberRatings)
+```
+
+We will also take a look at the number of ratings per user.  
+```{r eval = T, message = F, eval = TRUE}
+## Group Data by userId
+ratings_per_user <- h2o.group_by(ratings, by = "userId", nrow("rating"))
+colnames(ratings_per_user)[[2]] <- "numberRatings"
+## Generate histogram
+h2o.hist(ratings_per_user$numberRatings, breaks = seq(0, 1000, 20))
+```
+
+This is more evenly distributed than movie ratings with the majority of users rating between 20 and 100 movies.
+
+
+## Content Based Recommenders
+
+A Content Based Recommender aims to produce recommendations by item attributes and the user's preferences to those item attributes.  
+
+We will build a Content Based Recommender that will generate a genearlized linear model for each user.  The generalized linear model will try to predict the rating based on the movie attributes for a particular user.  Once we have a model for each user, we can predict the ratings on all movies.  If we are able to accurately predict the rating a user will give a new movie, we can choose recommendations based on the predicted rating.
+
+### Data Munging
+
+Before we can build our genearlized linear models, we will need to format the data so that there is a response variable and some predictors.
+
+Let's first change any necessary column types and join the two datasets together.
+
+```{r eval = T, message = F}
+## Change Data Types
+ratings$userId <- as.factor(ratings$userId)
+ratings$movieId <- as.factor(ratings$movieId)
+
+movies$movieId <- as.factor(movies$movieId)
+movies$title <- as.factor(movies$title)
+```
+
+```{r eval = T, message = F}
+## Join two datasets together
+full_data <- h2o.merge(ratings, movies, all.x = TRUE)
+```
+
+Genres are pipe separated.  If we leave it this way, our algorithm will not be able to detect the similarity between "Comedy" and "Comedy|Drama".  Therefore, we will separate the genres.
+
+```{r eval = T, message = F, results = "hide"}
+library('tidyr')
+library('dplyr')
+
+# Seperate Genres
+genres_df <- as.data.frame(movies[c("movieId", "genres")])
+genres_df <- genres_df %>% 
+  mutate(genres = strsplit(as.character(genres), "\\|")) %>% 
+  unnest(genres)
+
+genres_mat <- xtabs(~ movieId + genres, genres_df)
+
+# Convert to H2O Frame
+genres_h2o <- as.h2o(as.data.frame.matrix(genres_mat))
+genres_h2o <- h2o.cbind(as.h2o(data.frame('movieId' = rownames(genres_mat))), genres_h2o)
+
+# Change genre columns to enum
+for(i in colnames(genres_h2o)[c(2:ncol(genres_h2o))]){
+  genres_h2o[[i]] <- as.factor(genres_h2o[[i]])
+}
+
+# Join to full data
+full_data <- h2o.merge(full_data, genres_h2o, all.x = TRUE)
+
+```
+
+The last piece of data munging requires us to generate interaction terms between the user and the categorical predictor columns.
+
+
+```{r eval = T, message = F, results = "hide"}
+library('plyr')
+interaction_factors <- llply(colnames(full_data)[c(8:ncol(full_data))], function(x) c("userId", x))
+interaction_terms <- h2o.interaction(full_data, destination_frame = "temp_interactions.hex", factors = interaction_factors, pairwise = TRUE, max_factors = nrow(h2o.unique(full_data$userId)) * 2, min_occurrence = 3)
+```
+
+Append all interactions to the original frame.
+
+```{r eval = T, message = F, results = "hide"}
+full_data <- h2o.cbind(full_data, interaction_terms)
+```
+
+### Data Splitting
+
+Before we begin building any of our recommenders, we will first need to split the data into training and testing data.  The training data is what we will use to build the recommenders.  The testing data is what we will use to evaluate our recommenders.  If we see that we are accurately predicting ratings in the test data, then we know our recommender is working.
+
+
+We will randomly select 75% of the data to be training, the remaining 25% will be testing.  We will do this using h2o's `h2o.splitFrame` function.
+
+```{r eval = T, message = F, results = "hide"}
+
+split_data <- h2o.splitFrame(full_data, ratios = 0.75, seed = 1234, 
+                             destination_frames = c("train.hex", "test.hex"))
+train <- split_data[[1]]
+test <- split_data[[2]]
+
+```
+
+### GLM Models
+
+We are going to build a model using the user-genre interaction terms.  The idea is that each user has some preferences of the movie attributes.  By learning this information from their ratings, we will be able to predict how well a user will like a movie they haven't seen. Using interaction terms instead of building a model for each user will streamline our computation.
+
+
+```{r eval = T, message = F, results = "hide"}
+
+predictors <- c("userId", "movieId", colnames(train)[c(27:ncol(train))])
+cb_glm <- h2o.glm(x = predictors, y = "rating", training_frame = train, validation_frame = test, model_id = "cb_recommender.hex", remove_collinear_columns = TRUE, lambda = 1e-4)
+```
+
+We can take a look at the performance of the glm model on the test dataset.
+
+```{r eval = T, message = F, eval = TRUE}
+print(h2o.performance(cb_glm, valid = TRUE))
+```
+
+The Mean Average Error (MAE) tells us that on average we are about 0.77 away from the target rating.
+
+## Collaborative Filltering Recommenders
+
+A Collaborative Filtering Recommender aims to produce recommendations by recommending movies that similar users liked.
+
+We will use the Generalized Low Rank model to build a collaborative filtering recommender. The Generalized Low Rank Model (GLRM) will try to impute missing values in a user-movie matrix.  We will decompose the user-movie matrix into two smaller matrices, $A$ and $B$, and approximately reconstruct it by taking the product of $A$ and $B$.
+
+In order to build the GLRM, we need to convert the data into a user - movie rating matrix.
+
+```{r}
+library('Matrix')
+SparseMatrix <- function(data){
+  
+data_df <- as.data.frame(data[c("userId", "movieId", "rating")])
+data_df$userId <- factor(data_df$userId, as.matrix(h2o.unique(data$userId)))
+data_df$movieId <- factor(data_df$movieId, as.matrix(h2o.unique(data$movieId)))
+mat <- xtabs(rating ~ userId + movieId, data = data_df, sparse = TRUE)
+mat[mat == 0] <- NA
+sparse_data <- as.h2o(as.matrix(mat))
+sparse_data <- h2o.cbind(as.h2o(data.frame('userId' = rownames(mat))), sparse_data)
+
+return(sparse_data)
+}
+
+```
+
+```{r, results = "hide"}
+sparse_train <- SparseMatrix(train)
+sparse_test <- SparseMatrix(test)
+```
+
+```{r, echo = F}
+pander(as.data.frame(sparse_test[c(1:5), c(1:5)]), style = "simple", caption = "Sparse Data")
+```
+
+We will begin by building a model using `rank = 2`.
+
+```{r, results = "hide"}
+glrm_k <- 2
+glrm_cols <- colnames(sparse_train)[c(2:ncol(sparse_train))]
+base_glrm <- h2o.glrm(sparse_train, cols = glrm_cols, k = glrm_k, validation_frame = sparse_test, seed = 1,
+                       regularization_x = "Quadratic", regularization_y = "Quadratic", gamma_x = 1, gamma_y = 1, 
+                       transform = "DEMEAN", impute_original = TRUE, model_id = "base_glrm.hex")
+```
+
+We can use the `h2o.performance` function to get the root mean squared error.  The RMSE is 0.9.
+```{r}
+performance <- h2o.performance(base_glrm, valid = T)
+squared_error <- performance@metrics$numerr
+num_entries <- performance@metrics$numcnt
+
+print(paste0("RMSE: ", round(sqrt(squared_error/num_entries), digits = 2)))
+```
+
+Now let's take a look at the movie latent factors.
+
+```{r}
+library('plotly')
+
+movie_factors <- as.data.frame(t(as.data.frame(base_glrm@model$archetypes)))
+movie_factors$movieId <- rownames(movie_factors)
+titles <- unique(as.data.frame(full_data[c("movieId", "title")]))
+movie_factors <- join(movie_factors, titles, by = "movieId", type = "left")
+movie_factors <- movie_factors[!is.na(movie_factors$title), ]
+
+plot_ly(data = movie_factors, x = Arch1, y = Arch2, mode = "markers", text = paste0("Movie: ", title))
+
+```
+
+Let's focus on the more popular movies:
+
+```{r}
+
+popular_movies <- h2o.group_by(train, "movieId", nrow("rating"))
+popular_movies <- as.matrix(popular_movies[popular_movies$nrow_rating > 100, "movieId"])[, 1]
+popular_movie_factors <- movie_factors[movie_factors$movieId %in% popular_movies, ]
+
+plot_ly(data = popular_movie_factors, x = Arch1, y = Arch2, mode = "markers", text = paste0("Movie: ", title))
+```
+
+We can see some similar movies, like the Godfather and the Godfather II are close in the dimensional space. Movies that are close together in the graph should be somewhat similar. Now let's take a look at the user latent factors.
+
+```{r}
+user_factors <- as.data.frame(h2o.getFrame(base_glrm@model$representation_name))
+user_factors$userId <- as.matrix(sparse_train$userId)[, 1]
+
+plot_ly(data = user_factors, x = Arch1, y = Arch2, mode = "markers", text = paste0("User: ", userId))
+
+```
+
+In the graph of user latent factors, we see that most users are clustered in the center.  This makes sense since we found that most users are watching the same popular movies. 
+
+To improve upon this base model, we will try to determine the optimal rank `k` and regularization strength. We will create models using various parameters and see which one minimizes the validation error.
+
+```{r, results = "hide"}
+
+k_range <- c(5, 10, 15)
+gamma_range <- c(0, 5, 10)
+all_combos <- expand.grid(k_range, gamma_range)
+
+all_models <- dlply(all_combos, c("Var1", "Var2"), function(params) 
+  h2o.glrm(sparse_train, cols = glrm_cols, k = params$Var1, validation_frame = sparse_test, seed = 1,
+           loss = "Quadratic", regularization_x = "Quadratic", regularization_y = "Quadratic", 
+           gamma_x = params$Var2, gamma_y = params$Var2, transform = "DEMEAN", impute_original = TRUE)
+  )
+```
+
+We will now plot the RMSE per parameter combination.
+```{r, messages = F}
+# Plot RMSE, Rank, and Gamma
+
+RMSE <- function(model, train, valid){
+  perf <- h2o.performance(model, train = train, valid = valid)
+  return(sqrt(perf@metrics$numerr/perf@metrics$numcnt))
+}
+
+library('plotly')
+
+rmse <- ldply(all_models, function(ml) 
+  data.frame('k' = ml@parameters$k, 
+             'gamma' = ml@allparameters$gamma_x,
+             'RMSE' = c(RMSE(ml, train = T, valid = F), RMSE(ml, train = F, valid = T)),
+             'type' = c("training", "validation"),
+             'model_id' = ml@model_id)
+)
+
+validation_error <- rmse[rmse$type == "validation", ]
+validation_error$k <- as.factor(validation_error$k)
+plot_ly(data = validation_error, x = gamma, y = RMSE, mode = "markers+lines", color = k, 
+        text = paste0("k: ", k, "\n gamma: ", gamma))
+```
+
+Our best model has a rank of 10 and a regularizer strength of 10.  This will be our collaborative filtering recommender.
+
+```{r}
+
+model_id <- as.character(validation_error[validation_error$RMSE == min(validation_error$RMSE), "model_id"])
+cf_glrm <- h2o.getModel(model_id)
+```
+
+## Hybrid Recommenders
+
+For the hybrid recommender, we will take the average of our two recommendations.  
+
+```{r, results = "hide"}
+
+library('data.table')
+
+HybridRecommender <- function(cb_model, cf_model, test, sparse_test){
+  
+  message("Get Content Based predictions")
+  cb_predictions <- h2o.predict(cb_model, test)
+  colnames(cb_predictions) <- "CB_predict"
+  cb_predictions <- h2o.cbind(test[c("userId", "movieId", "rating")], cb_predictions)
+  cb_predictions <- as.data.table(cb_predictions)
+  
+  message("Get Collaborative Filtering predictions")
+  sparse_cf <- h2o.predict(cf_model, sparse_test)
+  colnames(sparse_cf) <- gsub("reconstr_", "", colnames(sparse_cf))
+  filter_mat <- sparse_test[cf_model@parameters$x]
+  filter_mat <- filter_mat/filter_mat
+  sparse_cf <- sparse_cf * filter_mat
+  
+  cf_predictions_mat <- Matrix(data = sparse_cf, nrow = nrow(sparse_cf), 
+                           dimnames = list(as.matrix(sparse_test$userId)[, 1], colnames(sparse_cf)),
+                           sparse = TRUE)
+  cf_predictions <- summary(cf_predictions_mat)
+  cf_predictions <- cf_predictions[!is.na(cf_predictions$x), ]
+  cf_predictions$i <- as.factor(rownames(cf_predictions_mat)[cf_predictions$i])
+  cf_predictions$j <- as.factor(colnames(cf_predictions_mat)[cf_predictions$j])
+  colnames(cf_predictions) <- c("userId", "movieId", "CF_predict")
+  
+  cf_predictions <- as.data.table(cf_predictions)
+ 
+  message("Combine predictions")
+  full_predictions <- merge(cb_predictions, cf_predictions, by = c("userId", "movieId"), 
+                            all.x = TRUE, all.y = TRUE)
+  full_predictions[is.na(full_predictions)] <- 0
+  
+  full_predictions$Hybrid_predict <- rowMeans(full_predictions[, c("CB_predict", "CF_predict"), with = FALSE])
+  
+  return(full_predictions)
+}
+```
+
+
+We can now take a look at the Root Mean Squared Error of our recommendations and compare to the Content Based and Collaborative Filtering recommendations.
+
+```{r, results = "hide"}
+# Generate Hybrid Recommendations
+hybrid_recommendations <- HybridRecommender(cb_glm, cf_glrm, test, sparse_test)
+
+```
+
+```{r}
+
+# Calculate RMSE
+hybrid_rmse <- sqrt(mean((hybrid_recommendations$rating - hybrid_recommendations$Hybrid_predict)^2))
+cb_rmse <- sqrt(mean((hybrid_recommendations$rating - hybrid_recommendations$CB_predict)^2))
+cf_rmse <- sqrt(mean((hybrid_recommendations$rating - hybrid_recommendations$CF_predict)^2))
+
+print(paste0("Hybrid RMSE: ", round(hybrid_rmse, digits = 2)))
+print(paste0("Content Based RMSE: ", round(cb_rmse, digits = 2)))
+print(paste0("Collaborative Filtering RMSE: ", round(cf_rmse, digits = 2)))
+
+```
+
+The hybrid RMSE is slightly worse than our Collaborative Filtering RMSE. Let's take a look at the error on a user level.
+
+```{r}
+
+UserRMSE <- function(user_data){
+  
+   hybrid_rmse <- sqrt(mean((user_data$rating - user_data$Hybrid_predict)^2))
+   cf_rmse <- sqrt(mean((user_data$rating - user_data$CF_predict)^2))
+   cb_rmse <- sqrt(mean((user_data$rating - user_data$CB_predict)^2))
+   return(data.frame('Hybrid' = hybrid_rmse, 'CF' = cf_rmse, 'CB' = cb_rmse))
+  
+}
+
+
+rmse_by_user <- hybrid_recommendations[, UserRMSE(.SD), by = "userId"]
+rmse_by_user <- rmse_by_user[, Best:= which.min(c(Hybrid, CF, CB)), by = "userId"]
+rmse_by_user$Best <- c("Hybrid", "CF", "CB")[rmse_by_user$Best]
+
+best_freq <- table(rmse_by_user$Best)
+
+plot_ly(y = as.numeric(best_freq), x = names(best_freq), type = "bar", marker = list(color="firebrick")) %>%
+  layout(yaxis = list(title = "Number of Users"), xaxis = list(title = "Best Recommender"))
+```
+
+We can see that even though Collaborative Filtering has slightly higher RMSE, about 1/3 of users have the best results with a hybrid recommender. We may be able to improve results by taking a weighted mean of the Collaborative Filtering and Content Based predictions rather than the average. Additionally, we could try stacking the models and using a super learner to combine the predictions.
+
+## Shiny Application
+
+The following functions generate the data found in the Shiny Application folder: shiny-app.  The data used in the shiny application is for the first 100 user's and the most popular movies.  
+
+### Formatted Data
+
+This data is used for displaying the history of the user.
+
+```{r, eval = F}
+
+selected_users <- as.character(c(1:100))
+selected_movies <- as.matrix(ratings_per_movie[ratings_per_movie$numberRatings > 500, ]$movieId)[, 1]
+
+formatted_data <- full_data[full_data$userId %in% selected_users & full_data$movieId %in% selected_movies, ]
+formatted_data <- formatted_data[c("movieId", "userId", "rating", "title", "genres")]
+h2o.exportFile(formatted_data, "shiny_app/FormattedData.csv")
+```
+
+### Movie Latent Factors
+
+We will save the movie latent factors to be able to visualize the recommendations in the reduced dimensional space.
+
+```{r, eval = F}
+library('tsne')
+movie_factors <- as.h2o(t(cf_glrm@model$archetypes))
+movie_factors <- h2o.cbind(movie_factors, as.h2o(colnames(cf_glrm@model$archetypes)))
+colnames(movie_factors)[ncol(movie_factors)] <- "movieId"
+
+movie_factors <- movie_factors[movie_factors$movieId %in% selected_movies, ]
+movie_factors <- merge(movie_factors, movies[c("movieId", "title")], all.x = TRUE)
+
+# Use TSNE to reduce the dimensionality of the movie latent factors to dimension 2
+# We can graph 2-D factors
+archetypes <- as.matrix(movie_factors[grep("Arch", colnames(movie_factors))])
+tsne_factors <- tsne(archetypes, k = 2, initial_dims = ncol(archetypes))
+tsne_factors <- as.data.frame(tsne_factors)
+
+# Add movie title and ID to tsne factors
+tsne_factors <- cbind(tsne_factors, as.data.frame(movie_factors[c("movieId", "title")]))
+
+write.csv(tsne_factors, "shiny_app/MovieLatentFactors.csv", row.names = FALSE)
+
+```
+
+### Test Predictions
+
+We will save the test predictions to be able to display the Root Mean Squared Error for the different recommender types.
+
+```{r, eval = F}
+hybrid_recommendations <- hybrid_recommendations[hybrid_recommendations$userId %in% selected_users, ]
+write.csv(hybrid_recommendations, "shiny_app/TestPredictions.csv", row.names = FALSE)
+
+```
+
+### Predictions
+
+We will save the predictions of all movies to be able to display the recommendations for a user.  We will restrict our recommendations to popular movies and for the first 100 users.
+
+We will create a function that returns the Content Based Predictions:
+```{r, eval = F}
+
+GetCBPredictions <- function(cb_model, data_as_dt, users, movies, genres, interaction_factors){
+  
+  message("Get all possible movie - user combinations")
+  all_combos <- expand.grid(users, movies)
+  colnames(all_combos) <- c("userId", "movieId")
+  
+  message("Add movie attributes to all combos")
+  movie_attributes <- unique(data_as_dt[, c("movieId", "title", genres), with = FALSE])
+  all_data <- merge(all_combos, movie_attributes, by = "movieId", all.x = FALSE, all.y = FALSE)
+  all_data <- as.h2o(all_data)
+  
+  message("Add interaction terms")
+  interaction_terms <- h2o.interaction(all_data, destination_frame = "temp_interactions.hex", 
+                                       factors = interaction_factors, pairwise = TRUE, 
+                                       max_factors = nrow(h2o.unique(all_data$userId)) * 2, min_occurrence = 3)
+  all_data <- h2o.cbind(all_data, interaction_terms)
+  
+  message("Predict on all data")
+  cb_predictions <- h2o.predict(cb_model, all_data)
+  colnames(cb_predictions) <- "CB_predict"
+  cb_predictions <- h2o.cbind(all_data[c("userId", "movieId",  "title")], cb_predictions)
+  
+  message("Remove already watched movies")
+  cb_predictions <- as.data.table(cb_predictions)
+  
+  watched_movies <- data_as_dt[, c("userId", "movieId", "Action"), with = FALSE]
+  
+  cb_predictions <- merge(cb_predictions, watched_movies, by = c("userId", "movieId"), all.x = TRUE)
+  cb_predictions <- cb_predictions[is.na(cb_predictions$Action), ]
+  
+  return(cb_predictions[, c("userId", "movieId", "title", "CB_predict"), with = FALSE])
+}
+
+```
+
+We will create a function that returns the Collaborative Filtering predictions:
+
+```{r, eval = F}
+
+GetCFPredictions <- function(cf_model, data_as_dt, sparse_test, users, movies){
+  
+  message("Get Collaborative Filtering predictions")
+  sparse_cf <- h2o.predict(cf_model, sparse_test)
+  colnames(sparse_cf) <- gsub("reconstr_", "", colnames(sparse_cf))
+  sparse_cf <- sparse_cf[which(colnames(sparse_cf) %in% movies)]
+  sparse_cf$userId <- sparse_test$userId
+  sparse_cf <- sparse_cf[sparse_cf$userId %in% users, ]
+  
+  message("Reformat so columns are userId, movieId, and prediction")
+  predictions_data <- sparse_cf[c(1:(ncol(sparse_cf) - 1))]
+  cf_predictions_mat <- Matrix(data = predictions_data, 
+                               nrow = nrow(predictions_data), 
+                               dimnames = list(as.matrix(sparse_cf$userId)[, 1], colnames(predictions_data)),
+                               sparse = TRUE)
+  cf_predictions <- summary(cf_predictions_mat)
+  cf_predictions <- cf_predictions[!is.na(cf_predictions$x), ]
+  cf_predictions$i <- as.factor(rownames(cf_predictions_mat)[cf_predictions$i])
+  cf_predictions$j <- as.factor(colnames(cf_predictions_mat)[cf_predictions$j])
+  colnames(cf_predictions) <- c("userId", "movieId", "CF_predict")
+  
+  cf_predictions <- as.data.table(cf_predictions)
+ 
+  message("Filter to not watched movies")
+  
+  watched_movies <- data_as_dt[, c("userId", "movieId", "Action"), with = FALSE]
+  cf_predictions <- merge(cf_predictions, watched_movies, by = c("userId", "movieId"), all.x = TRUE, all.y = FALSE)
+  cf_predictions <- cf_predictions[is.na(cf_predictions$Action), ]
+  cf_predictions <- cf_predictions[, c("userId", "movieId", "CF_predict"), with = FALSE]
+  
+  return(cf_predictions)
+}
+```
+
+Generate the recommendations:
+```{r, eval = F}
+
+selected_data <- full_data[full_data$movieId %in% selected_movies & full_data$userId %in% selected_users, ]
+selected_data <- selected_data[!is.na(selected_data$title), ]
+genres <- colnames(selected_data)[c(8:26)]
+data_as_dt <- as.data.table(selected_data[c("userId", "movieId", "title", genres)])
+colnames(data_as_dt) <- c("userId", "movieId", "title", genres)
+
+cb_recommendations <- GetCBPredictions(cb_glm, data_as_dt, selected_users, selected_movies, 
+                                       genres, interaction_factors)
+cf_recommendations <- GetCFPredictions(cf_glrm, data_as_dt, sparse_test, selected_users, selected_movies)
+
+full_recommendations <- merge(cb_recommendations, cf_recommendations, by = c("userId", "movieId"), 
+                              all.x = TRUE, all.y = TRUE)
+
+write.csv(full_recommendations, file = "shiny_app/Predictions.csv", row.names = FALSE)
+```
