@@ -16,7 +16,7 @@ Speaker: Jo-fai (Joe) Chow
 
 ### Content
 
-- T.B.C.
+- Project "Deep Water" ([PDF](https://github.com/h2oai/h2o-meetups/blob/master/2016_11_30_TensorFlow_Paris/H2O_Deep_Water_TensorFlow_Paris.pdf))
 
 
 
