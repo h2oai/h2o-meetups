@@ -20,6 +20,6 @@ Speakers: Jo-fai (Joe) Chow & Jakub Háva
 
 - Automatic Machine Learning with H2O (Jiqiong) ([Slides](https://docs.google.com/presentation/d/19RSDX5eH9fCYcTjJ2VZzS8X_vHzIoJzEWCqW1MQx150/edit?usp=sharing))
 
-- Sparkling Water 2.0 (Kuba) ([Slides T.B.A.]())
+- Sparkling Water 2.0 (Kuba) ([Slides](https://github.com/h2oai/h2o-meetups/blob/master/2016_12_01_R_Addicts_Paris/Paris_sparkling_water.pdf))
 
 
