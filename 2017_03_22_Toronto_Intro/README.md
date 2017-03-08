@@ -21,11 +21,10 @@ To follow along with all hands-on material please install:
 If you would like to try H2o in the simplest possible manner (i.e. without Python, using only H2o's "point-and-click" *Flow* interface), then you will need the following software:
 
 * [64-bit Java](https://java.com/en/download/manual.jsp)
-* [H2o Java jar](http://h2o-release.s3.amazonaws.com/h2o/rel-ueno/1/index.html) (Download and Run Tab)
+* [H2o Java jar](http://h2o-release.s3.amazonaws.com/h2o/rel-ueno/1/index.html) (*Download and Run* Tab)
 
 ***
 
 #### [Sample data](data)
 
-Please download the data before before attending the meetup in case internet is not available at the meetup venue. You can do so by clicking on the link to the data set in the [folder](data) and clicking download OR you can clone this repository using git.
----
+Please download the data before before attending the meetup in case internet is not available at the meetup venue. You can do so by clicking on the link to the data set in the [data folder](data) and clicking download OR you can clone this repository using git.
