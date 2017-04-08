@@ -16,5 +16,5 @@ Speakers: Jo-fai (Joe) Chow & Jakub Hava
 
 ### Content
 
-- H2O Latest Development Updates
-- Different Strategies of Scaling H2O Machine Learning on Apache Spark
+- H2O Latest Development Updates ([Slides](https://www.slideshare.net/0xdata/latest-developments-in-h2o))
+- Different Strategies of Scaling H2O Machine Learning on Apache Spark ([Slides](https://www.slideshare.net/0xdata/different-strategies-of-scaling-h2o-machine-learning-on-apache-spark))
