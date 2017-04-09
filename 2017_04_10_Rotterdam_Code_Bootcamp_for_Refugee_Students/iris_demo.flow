@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": ""
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"iris.csv\"]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"iris.csv\"]\n  destination_frame: \"Key_Frame__iris1.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 5\n  single_quotes: false\n  column_names: [\"sepal_length\",\"sepal_width\",\"petal_length\",\"petal_width\",\"species\"]\n  column_types: [\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Enum\"]\n  delete_on_done: true\n  check_header: 1\n  chunk_size: 4194304"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"Key_Frame__iris1.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame"
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame \"Key_Frame__iris.hex\", [0.8], [\"train\",\"test\"], 1234"
+    },
+    {
+      "type": "cs",
+      "input": "buildModel \"drf\""
+    },
+    {
+      "type": "cs",
+      "input": "buildModel 'drf', {\"model_id\":\"drf-default\",\"training_frame\":\"train\",\"nfolds\":0,\"response_column\":\"species\",\"ignored_columns\":[],\"ignore_const_cols\":true,\"ntrees\":50,\"max_depth\":20,\"min_rows\":1,\"nbins\":20,\"seed\":-1,\"mtries\":-1,\"sample_rate\":0.6320000290870667,\"score_each_iteration\":false,\"score_tree_interval\":0,\"balance_classes\":false,\"max_confusion_matrix_size\":20,\"max_hit_ratio_k\":0,\"nbins_top_level\":1024,\"nbins_cats\":1024,\"r2_stopping\":1.7976931348623157e+308,\"stopping_rounds\":0,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":0.001,\"max_runtime_secs\":0,\"checkpoint\":\"\",\"col_sample_rate_per_tree\":1,\"min_split_improvement\":0.00001,\"histogram_type\":\"AUTO\",\"categorical_encoding\":\"AUTO\",\"build_tree_one_node\":false,\"sample_rate_per_class\":[],\"binomial_double_trees\":false,\"col_sample_rate_change_per_level\":1}"
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"drf-default\""
+    },
+    {
+      "type": "cs",
+      "input": "predict"
+    },
+    {
+      "type": "cs",
+      "input": "predict model: \"drf-default\", frame: \"test\", predictions_frame: \"prediction-drf\""
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"prediction-drf\""
+    },
+    {
+      "type": "cs",
+      "input": "getFrameData \"prediction-drf\""
+    }
+  ]
+}
