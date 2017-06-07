@@ -1,0 +1,79 @@
+---
+title: "H2O + R Toy Example"
+output:
+  html_document: 
+    highlight: tango
+    theme: spacelab
+  html_notebook: default
+---
+
+```{r}
+# Install H2O package (if necessary)
+if (!require(h2o)) install.packages("h2o")
+```
+
+```{r}
+# Start a local H2O cluster (JVM) directly from R
+h2o.init(nthreads = -1)
+h2o.no_progress() # disable progress bar for nicer notebook output
+```
+
+
+
+```{r}
+# Load Iris dataset and convert it into H2O data frame
+h_iris <- as.h2o(iris)
+```
+
+
+```{r}
+# Quick comparison
+head(iris) # original R data frame
+head(h_iris) # H2O data frame
+```
+
+
+```{r}
+# Split data into train/test (80%/20%)
+h_split <- h2o.splitFrame(h_iris, ratios = 0.8, seed = 1)
+h_train <- h_split[[1]]
+h_test <- h_split[[2]]
+```
+
+```{r}
+# Quick look
+dim(h_train)
+summary(h_train)
+```
+
+```{r}
+dim(h_test)
+summary(h_test)
+```
+
+```{r}
+# Define features (predictors)
+features <- colnames(h_iris)[1:4]
+print(features)
+```
+  
+```{r}  
+# Build a Gradient Boosting Model with default settings
+# use ?h2o.gbm to look at all available settings
+model <- h2o.gbm(x = features,
+                 y = "Species",
+                 training_frame = h_train,
+                 seed = 123)
+print(model)
+```
+
+```{r}
+# Evaluate performance on test set
+h2o.performance(model, h_test)
+```
+
+```{r}
+# Make predictions
+yhat_test <- h2o.predict(model, h_test)
+head(yhat_test)
+```
