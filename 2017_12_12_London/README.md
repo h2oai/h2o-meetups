@@ -18,13 +18,11 @@ Speakers: Katarzyna (Kasia) Kulma, Ben Ellerby & Jack Owen
 
 ### Content
 
-- Talk #1: Interpretable Machine Learning by Kasia (see pdf)
+- Talk #1: Interpretable Machine Learning by Kasia (see pdf) ([Video](https://www.youtube.com/watch?v=CY3t11vuuOM))
 
-- Talk #2: Building a Trump/Obama Tweet Classifier with 98% Accuracy in 1 Hour! ([Link](http://slides.com/benellerby/deck#/))
+- Talk #2: Building a Trump/Obama Tweet Classifier with 98% Accuracy in 1 Hour! ([Link](http://slides.com/benellerby/deck#/)) ([Video](https://www.youtube.com/watch?v=8Vxii5vbotg))
 
-- Talk #3: What people get wrong when building AI ventures (see pdf)
+- Talk #3: What people get wrong when building AI ventures (see pdf) ([Video](https://www.youtube.com/watch?v=zFYcXvOrwDE))
 
-
-Links to Video (T.B.A.)
 
 
