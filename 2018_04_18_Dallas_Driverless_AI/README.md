@@ -1,4 +1,5 @@
-# Data & AI - Microsoft DFW - H2O Driverless AI: Auto Machine Learning in Azure
+# H2O Driverless AI: Auto Machine Learning in Azure
+## Data & AI - Microsoft DFW Meetup 
 
 ---
 
@@ -28,4 +29,9 @@ Speaker: Gregory Kanevsky
 
 ### References and Resources
 
--
+- [H2O Driverless AI](https://www.h2o.ai/driverless-ai/)
+- [Driverless AI Docs](http://docs.h2o.ai/driverless-ai/latest-stable/docs/userguide/index.html)
+- [Automatic Feature Engineering with Driverless AI by Dmitry Larko](https://youtu.be/VMTKcT1iHww)
+- [Intro to AutoML + Hands-on Lab by Erin LeDell](https://youtu.be/42Oo8TOl85I)
+- [Interpretable Machine Learning Using LIME Framework with Kasia Kulma - London AI & DL Meetup](https://youtu.be/42Oo8TOl85I)
+
