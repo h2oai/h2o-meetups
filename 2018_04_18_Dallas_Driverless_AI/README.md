@@ -27,6 +27,16 @@ Speaker: Gregory Kanevsky
 
 ---
 
+### Slides
+
+Please download pdf with slides [here](https://s3-us-west-1.amazonaws.com/h2o.ai/events/Dallas+Meetup+2017-04-18/h2o-driverless-ai-2018-04-18-ms-meetup-Irving.pdf).
+
+### Dallas Animal Services Shelter Records 
+
+Dallas Open Data Animal Services shelter records ready to load into Driverless AI found [here](https://s3-us-west-1.amazonaws.com/h2o.ai/events/Dallas+Meetup+2017-04-18/dallas_animal_services_allfiles.zip) (9 MB).
+
+---
+
 ### References and Resources
 
 - [H2O Driverless AI](https://www.h2o.ai/driverless-ai/)
