@@ -8,12 +8,12 @@
 Date: Apr 18, 2018
 
 Meetup: 
-[Link 1](https://www.meetup.com/Data-AI-Microsoft/events/248946695/)
+[Data & AI - Microsoft DFW Meetup](https://www.meetup.com/Data-AI-Microsoft/events/248946695/)
 
-Place:
-[Microsoft Corporation 7000 State Hwy 161, Irving, TX](https://goo.gl/maps/VhTyy3gAZM82) 
+Place: Dallas - Fort Worth
+([Microsoft Corporation 7000 State Hwy 161, Irving, TX](https://goo.gl/maps/VhTyy3gAZM82))
 
-Speaker: Gregory Kanevsky
+Speaker: Gregory Kanevsky, H2O.ai Principal Sales Consultant
 
 ---
 
