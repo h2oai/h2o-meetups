@@ -1,4 +1,6 @@
-# London
+# London Artificial Intelligence & Deep Learning
+
+## June #LondonAI: XAI, Neural Style Transfer & e-Learning
 
 ---
 
@@ -6,8 +8,7 @@
 
 Date: June 19, 2018
 
-Meetup: 
-[Link 1](https://www.meetup.com/London-Artificial-Intelligence-Deep-Learning/events/250921658/)
+[Meetup Page](https://www.meetup.com/London-Artificial-Intelligence-Deep-Learning/events/250921658/)
 
 ---
 
