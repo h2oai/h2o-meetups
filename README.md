@@ -1,8 +1,20 @@
 # H2O Meetups and Presentations
 
-[![Join the chat at https://gitter.im/h2oai/h2o-meetups](https://badges.gitter.im/h2oai/h2o-meetups.svg)](https://gitter.im/h2oai/h2o-meetups?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 The meetup presentations are also hosted on [SlideShare](http://www.slideshare.net/0xdata/presentations).
+
+Please join us at a [meetup near you](https://www.meetup.com/pro/h2oai)!
+
+## H2O World 2018
+
+### [New York City (June 7, 2018)](http://h2oworld.h2o.ai/newyork/)
+Links to presentations coming soon.
+
+
+## H2O World 2017
+
+Mountain View, California
+
+Links to presentations coming soon.
 
 ## [H2O Open Tour 2016](http://open.h2o.ai)
 
@@ -22,4 +34,4 @@ The meetup presentations are also hosted on [SlideShare](http://www.slideshare.n
 ### [Chicago (May 3, 2016)](http://open.h2o.ai/chicago.html)
 * [Building a Machine Learning Application with AWS Lambda](2016_05_03_H2O_Open_Tour_Chicago_Application)
 
----
+
