@@ -1,0 +1,226 @@
+---
+title: "H2O-3 Target Encoding Example"
+output: html_notebook
+---
+
+Also check out the original documentation http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-munging/target-encoding.html
+
+
+## H2O Cluster
+
+```{r}
+library(h2o)
+h2o.no_progress()
+h2o.init()
+```
+
+
+## Data
+
+```{r}
+# Source: https://raw.githubusercontent.com/h2oai/app-consumer-loan/master/data/loan.csv
+d_loan <- h2o.importFile("loan.csv")
+d_loan$bad_loan <- as.factor(d_loan$bad_loan)
+```
+
+
+## Baseline Model
+
+Randomly split the data into 75% training and 25% test We will use both cross-validation and test to evaluate how well the model performs.
+
+```{r}
+# Split Frame into training and test
+splits <- h2o.splitFrame(d_loan, seed = 1234,
+                         destination_frames=c("d_train", "d_test"),
+                         ratios = 0.75)
+d_train <- splits[[1]]
+d_test <- splits[[2]]
+
+# Assign 5-Fold
+d_train$fold <- h2o.kfold_column(d_train, 5, seed = 1234)
+```
+
+```{r}
+head(d_train)
+```
+
+```{r}
+head(d_test)
+```
+
+
+Now train the baseline model. We will train a GBM model with 5-fold CV & early stopping.
+
+
+```{r}
+response <- "bad_loan"
+predictors <- c("loan_amnt", "int_rate", "emp_length", "annual_inc", "dti",
+                "delinq_2yrs", "revol_util", "total_acc", "longest_credit_length",
+                "verification_status", "term", "purpose", "home_ownership",
+                "addr_state")
+
+gbm_baseline <- h2o.gbm(x = predictors, 
+                        y = response,
+                        training_frame = d_train, 
+                        score_tree_interval = 10, 
+                        ntrees = 500,
+                        sample_rate = 0.8, 
+                        col_sample_rate = 0.8, 
+                        fold_column = "fold",
+                        seed = 1234,
+                        stopping_rounds = 5, 
+                        stopping_metric = "AUC",
+                        model_id = "gbm_baseline")
+```
+
+
+GBM Baseline Model Evaluation (AUC, Higher = Better):
+
+**Training**: ```r h2o.auc(h2o.performance(gbm_baseline, d_train))```
+
+**5-Fold CV**: ```r gbm_baseline@model$cross_validation_metrics@metrics$AUC```
+
+**Testing**: ```r h2o.auc(h2o.performance(gbm_baseline, newdata = d_test))```
+
+
+Our training data has much higher AUC than our validation data.
+
+The variables with the greatest importance are addr_state, term, and int_rate. It makes sense that the int_rate has such high variable importance since this is related to loan default but it is surprising that addr_state has such high variable importance. The high variable importance could be because our model is memorizing the training data through this high cardinality categorical column.
+
+```{r}
+# Variable Importance
+h2o.varimp_plot(gbm_baseline)
+```
+
+
+## Baseline Model without `addr_state`
+
+See if the AUC improves on the test data if we remove the addr_state predictor. This can indicate that the model is memorizing the training data.
+
+
+```{r}
+predictors <- setdiff(predictors, "addr_state")
+
+gbm_no_addr <- h2o.gbm(x = predictors, 
+                       y = response,
+                       training_frame = d_train, 
+                       score_tree_interval = 10, 
+                       ntrees = 500,
+                       sample_rate = 0.8, 
+                       col_sample_rate = 0.8, 
+                       fold_column = "fold",
+                       seed = 1234,
+                       stopping_rounds = 5, 
+                       stopping_metric = "AUC",
+                       model_id = "gbm_no_addr")
+```
+
+
+## Comparison
+
+Let's compare the baseline models with and without `addr_state`
+
+**Evaluation (AUC, Higher = Better)**:
+
+**Training** (with addr_state): ```r h2o.auc(h2o.performance(gbm_baseline, d_train))``` vs. (without addr_state): ```r h2o.auc(h2o.performance(gbm_no_addr, d_train))```
+
+**5-Fold CV** (with addr_state): ```r gbm_baseline@model$cross_validation_metrics@metrics$AUC``` vs. (without addr_state): ```r gbm_no_addr@model$cross_validation_metrics@metrics$AUC```
+
+**Testing** (with addr_state): ```r h2o.auc(h2o.performance(gbm_baseline, newdata = d_test))``` vs. (without addr_state): ```r h2o.auc(h2o.performance(gbm_no_addr, newdata = d_test))```
+
+We see a slight improvement in our test AUC if we do not include the `addr_state` predictor. This is a good indication that the GBM model may be overfitting with this column.
+
+
+## Target Encoding in H2O-3
+
+Start by creating the target encoding map. This has the number of bad loans per state (numerator) and the number of rows per state (denominator). We can later use this information to create the target encoding per state.
+
+```{r}
+te_map <- h2o.target_encode_create(d_train, 
+                                   x = list("addr_state"),
+                                   y = response, 
+                                   fold_column = "fold")
+head(te_map$addr_state)
+```
+
+Apply the target encoding to our training data.
+
+```{r}
+d_train_te <- h2o.target_encode_apply(d_train, 
+                                      x = list("addr_state"), 
+                                      y = response,
+                                      target_encode_map = te_map, 
+                                      holdout_type = "KFold",
+                                      fold_column = "fold",
+                                      blended_avg = TRUE, 
+                                      noise_level = 0, 
+                                      seed = 1234)
+
+head(d_train_te[c("addr_state", "fold", "TargetEncode_addr_state")])
+```
+
+For testing data, we do not need to apply any of the overfitting prevention techniques since our target encoding map was created on the training data, not the testing data.
+
+```{r}
+d_test_te <- h2o.target_encode_apply(d_test, 
+                                     x = list("addr_state"), 
+                                     y = response,
+                                     target_encode_map = te_map, 
+                                     holdout_type = "None",
+                                     fold_column = "fold",
+                                     blended_avg = FALSE, 
+                                     noise_level = 0)
+
+head(d_test_te[c("addr_state", "TargetEncode_addr_state")])
+```
+
+```{r}
+head(d_train_te)
+```
+
+
+## Train Model with KFold Target Encoding
+
+Train a new model, this time replacing the `addr_state` with the `TargetEncode_addr_state`.
+
+```{r}
+predictors <- c("loan_amnt", "int_rate", "emp_length", "annual_inc",
+                "dti", "delinq_2yrs", "revol_util", "total_acc",
+                "longest_credit_length", "verification_status",
+                "term", "purpose", "home_ownership",
+                "TargetEncode_addr_state")
+
+gbm_te <- h2o.gbm(x = predictors, 
+                  y = response,
+                  training_frame = d_train_te, # new data frame 
+                  score_tree_interval = 10, 
+                  ntrees = 500,
+                  sample_rate = 0.8, 
+                  col_sample_rate = 0.8, 
+                  fold_column = "fold",
+                  seed = 1234,
+                  stopping_rounds = 5, 
+                  stopping_metric = "AUC",
+                  model_id = "gbm_te")
+```
+
+
+## Comparison
+
+Let's compare all three models:
+
+**Evaluation (AUC, Higher = Better)**:
+
+**Training** (with addr_state): ```r h2o.auc(h2o.performance(gbm_baseline, d_train))``` vs. (without addr_state): ```r h2o.auc(h2o.performance(gbm_no_addr, d_train))``` vs. (with TE): ```r h2o.auc(h2o.performance(gbm_te, d_train))```
+
+**5-Fold CV** (with addr_state): ```r gbm_baseline@model$cross_validation_metrics@metrics$AUC``` vs. (without addr_state): ```r gbm_no_addr@model$cross_validation_metrics@metrics$AUC``` vs. (with TE): ```r gbm_te@model$cross_validation_metrics@metrics$AUC```
+
+**Test** (with addr_state): ```r h2o.auc(h2o.performance(gbm_baseline, newdata = d_test))``` vs. (without addr_state): ```r h2o.auc(h2o.performance(gbm_no_addr, newdata = d_test))``` vs. (with TE) ```r h2o.auc(h2o.performance(gbm_te, newdata = d_test))```
+
+We see a slight increase in the AUC on validation data. Also, the `addr_state` with target encoding has much smaller variable importance.
+
+```{r}
+# Variable Importance
+h2o.varimp_plot(gbm_te)
+```
+
