@@ -13,3 +13,6 @@ Agenda:
 - Talk 2: No more grid search! How to build models effectively by Thomas Huijskens (QuantumBlack)
 - Talk 3: Self-adaptive tuning of the NN learning rate by James Wang
 
+Video:
+- Talk 1: https://youtu.be/fxKF616nC1I
+- Talk 2: https://youtu.be/q-vz2Z5UTtY
