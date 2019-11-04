@@ -10,6 +10,13 @@ Location: The Microsoft Reactor London
 
 On Google Drive [Link](https://drive.google.com/drive/folders/1qnaNK_dO71roar9EHjx4dwpZZLxGFntx?usp=sharing)
 
+## Videos on YouTube
+
+- Talk 1: https://youtu.be/ZbK_U4RcgZ4
+- Talk 2: https://youtu.be/xsLxvlGspt8
+- Talk 3: https://youtu.be/K8COSk3LgNQ
+- Talk 4: https://youtu.be/lBDjHh-2UyU
+
 ## Agenda
 
 ### Talk 1: ML in healthcare data: practical considerations for a generalizable model by Fiona Grimson and Benjamin Bray (IQVIA)
