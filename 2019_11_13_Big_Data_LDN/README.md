@@ -32,7 +32,7 @@ About Viswanath:
 
 ### Talk 2: Why not to use AI? by Jyoti Mishra
 
-- The talk will cover different challenges of AI projects and details of technical infrastructure required to build a successful AI Product. It will also cover several misconceptions of how AI is perceived by people and the business loss caused.
+The talk will cover different challenges of AI projects and details of technical infrastructure required to build a successful AI Product. It will also cover several misconceptions of how AI is perceived by people and the business loss caused.
 
 About Jyoti:
 
