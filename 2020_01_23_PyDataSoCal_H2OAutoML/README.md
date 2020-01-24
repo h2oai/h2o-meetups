@@ -19,6 +19,10 @@ R and Python code with H2O machine learning code examples are available on GitHu
 Erin LeDell is the Chief Machine Learning Scientist at H2O.ai, the company that produces the open source, distributed machine learning platform, H2O. At H2O.ai, she leads the H2O AutoML project and her current research focus is automated machine learning. Before joining H2O.ai, she was the Principal Data Scientist at Wise.io (acquired by GE) and Marvin Mobile Security (acquired by Veracode), the founder of DataScientific, Inc. and a software engineer. She is also founder of the Women in Machine Learning and Data Science (WiMLDS) organization (wimlds.org) and co-founder of R-Ladies Global (rladies.org). Erin received her Ph.D. in Biostatistics with a Designated Emphasis in Computational Science and Engineering from University of California, Berkeley and has a B.S. and M.A. in Mathematics.
 
 
-## Talk 2: TBD
+## Talk 2: How to start a Data Science Initiative, project and team? by Annie Flippo
 
+### About Annie: 
 
+Annie is a data science expert focusing on the application of machine learning techniques to extract insights in the areas of marketing, media, and consumer behavior. She is Director of Data Science & Analytics at inMarket, a mobile advertising platform.  She holds a B.S. degree in Math & Economics and an M.A. degree in Economics. Her focus is to make data science accessible, intuitive and fun to learn for everyone.
+
+[https://www.linkedin.com/in/acflippo/](https://www.linkedin.com/in/acflippo/)
