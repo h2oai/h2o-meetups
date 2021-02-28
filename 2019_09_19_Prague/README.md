@@ -6,6 +6,8 @@ Date: Sep 19, 2019
 
 Location: H2O.ai Prague Office
 
+Video Link: https://www.youtube.com/watch?v=Z1IQLNLCN5c
+
 ## Agenda
 
 ### Talk 1: Customized Loss Function in Gradient Boosting Machine by Veronika Maurerova
