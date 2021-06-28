@@ -4,9 +4,9 @@ Date: May 4, 2021
 
 Location: Online
 
-[Video Link]: https://www.linkedin.com/video/live/urn:li:ugcPost:6795270973898731520/
+Video: [Link](https://www.linkedin.com/video/live/urn:li:ugcPost:6795270973898731520/)
 
-[Slides]: See PDF
+Slides: see PDF
 
 Hello Maker,
 
