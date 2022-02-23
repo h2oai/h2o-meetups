@@ -6,6 +6,8 @@ Location: Online
 
 [University of San Francisco Seminar Series in Data Science Meetup](https://www.meetup.com/USF-Seminar-Series-in-Data-Science/events/283268466/)
 
+Video: [here](https://www.youtube.com/watch?v=9CmEZG7YDx4)
+
 ## Talk: Admissible Machine Learning by Erin LeDell
 
 We have developed new tools to aid in the design of admissible learning algorithms which are efficient (enjoy good predictive accuracy), fair (minimize discrimination against minority groups), and interpretable (provide mechanistic understanding) to the best possible extent.
