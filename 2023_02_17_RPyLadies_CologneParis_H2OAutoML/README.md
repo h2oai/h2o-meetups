@@ -1,8 +1,10 @@
 # R-Ladies Cologne, R-Ladies Paris, PyLadies Paris Joint Meetup
 
-Date: February 17, 2023
+📅 February 17, 2023
 
-Location: Online
+🌐 Online
+
+📺 [https://www.youtube.com/watch?v=Qd6Re5_I-Ps](Video)
 
 [R-Ladies Cologne](https://www.meetup.com/de-DE/rladies-cologne/events/291452327/),
 [R-Ladies Paris](https://www.meetup.com/fr-FR/rladies-paris/events/291511126/) & [PyLadies Paris](https://www.meetup.com/pyladiesparis/events/291452649/)
