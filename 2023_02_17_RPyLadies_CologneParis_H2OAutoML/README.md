@@ -4,7 +4,7 @@
 
 🌐 Online
 
-📺 [https://www.youtube.com/watch?v=Qd6Re5_I-Ps](Video)
+📺 [Video](https://www.youtube.com/watch?v=Qd6Re5_I-Ps)
 
 [R-Ladies Cologne](https://www.meetup.com/de-DE/rladies-cologne/events/291452327/),
 [R-Ladies Paris](https://www.meetup.com/fr-FR/rladies-paris/events/291511126/) & [PyLadies Paris](https://www.meetup.com/pyladiesparis/events/291452649/)
