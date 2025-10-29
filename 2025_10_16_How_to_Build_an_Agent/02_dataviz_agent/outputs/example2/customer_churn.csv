@@ -1,0 +1,1001 @@
+customer_id,churn_reason,months_as_customer,monthly_charges,customer_satisfaction
+1,Poor Customer Service,47,142.6012137136969,5
+2,Service Not Needed Anymore,12,52.65890258521285,5
+3,Found Better Alternative,16,114.52940906007083,5
+4,Product Quality Issues,24,147.62832711003787,4
+5,Better Price Elsewhere,19,39.23784615705389,1
+6,Better Price Elsewhere,8,122.11619953320263,1
+7,Better Price Elsewhere,31,66.18130106624548,4
+8,Moved to Competitor,21,193.32683754276437,3
+9,Found Better Alternative,17,107.03821640958645,2
+10,Found Better Alternative,23,165.07865895952847,1
+11,Better Price Elsewhere,37,119.04077758812711,2
+12,Service Not Needed Anymore,54,27.81425591386745,4
+13,Too Expensive,16,133.96724760692402,3
+14,Better Price Elsewhere,6,191.25260159719826,3
+15,Better Price Elsewhere,8,128.29012762633963,3
+16,Better Price Elsewhere,25,167.45399469682224,4
+17,Poor Customer Service,18,179.1571634027134,5
+18,Product Quality Issues,25,61.054358950807845,5
+19,Poor Customer Service,12,58.1680711834808,2
+20,Poor Customer Service,15,129.97657799317852,5
+21,Found Better Alternative,59,93.98512456520685,5
+22,Better Price Elsewhere,26,171.17503451600967,3
+23,Poor Customer Service,41,182.004162211642,3
+24,Poor Customer Service,45,83.61584827448925,2
+25,Product Quality Issues,26,62.636700615406774,1
+26,Too Expensive,47,160.49459274389514,2
+27,Better Price Elsewhere,32,69.4650863986645,2
+28,Product Quality Issues,10,168.0705773324621,4
+29,Product Quality Issues,16,96.2728856567773,4
+30,Better Price Elsewhere,7,140.1589818724647,2
+31,Found Better Alternative,17,37.19635649024027,2
+32,Better Price Elsewhere,23,132.29467844178313,2
+33,Better Price Elsewhere,26,101.31818217270124,5
+34,Service Not Needed Anymore,21,125.58952337158534,4
+35,Service Not Needed Anymore,22,50.24255739407542,2
+36,Too Expensive,58,152.63727408995277,3
+37,Poor Customer Service,7,175.30347395778114,3
+38,Better Price Elsewhere,14,59.013164016339616,5
+39,Found Better Alternative,15,37.22861999362911,5
+40,Poor Customer Service,53,24.254945488340553,1
+41,Better Price Elsewhere,7,135.5548700797879,1
+42,Product Quality Issues,9,129.27692649598055,1
+43,Better Price Elsewhere,51,118.4055342885326,5
+44,Moved to Competitor,48,61.75047730087557,5
+45,Poor Customer Service,8,90.36307926299264,5
+46,Found Better Alternative,50,127.00574033351114,3
+47,Poor Customer Service,59,109.41803459465049,5
+48,Product Quality Issues,23,197.8013936386797,3
+49,Product Quality Issues,29,44.55915546021196,1
+50,Better Price Elsewhere,18,145.1260197285669,1
+51,Service Not Needed Anymore,31,92.77737825877259,1
+52,Too Expensive,30,97.07593068661066,2
+53,Service Not Needed Anymore,52,149.16759781847173,2
+54,Moved to Competitor,39,144.63850723838652,4
+55,Product Quality Issues,35,198.4260788663939,4
+56,Moved to Competitor,18,43.11097210174254,4
+57,Better Price Elsewhere,59,38.73973688914994,2
+58,Better Price Elsewhere,42,150.3809870831734,2
+59,Better Price Elsewhere,39,124.10964506115364,4
+60,Poor Customer Service,17,69.34891998076506,4
+61,Poor Customer Service,14,34.29548641801759,5
+62,Poor Customer Service,31,35.4184849273575,4
+63,Too Expensive,24,180.9543574395413,5
+64,Poor Customer Service,35,54.536118449373724,3
+65,Poor Customer Service,44,78.20688118079374,2
+66,Product Quality Issues,45,60.798152400857845,4
+67,Better Price Elsewhere,34,83.89933504974871,2
+68,Too Expensive,3,32.49629169429681,2
+69,Better Price Elsewhere,37,113.43076236348867,2
+70,Technical Issues,43,32.17026144659868,3
+71,Too Expensive,40,164.0641714080251,1
+72,Better Price Elsewhere,26,62.06817474387795,4
+73,Better Price Elsewhere,55,117.20214462881191,1
+74,Too Expensive,23,178.41423576106249,1
+75,Found Better Alternative,44,137.15792642849496,1
+76,Found Better Alternative,39,115.93240157924035,2
+77,Too Expensive,15,78.38007556076761,5
+78,Better Price Elsewhere,56,79.94034435047563,2
+79,Poor Customer Service,49,140.50765193567423,2
+80,Better Price Elsewhere,4,198.94508501981016,1
+81,Moved to Competitor,29,139.13105417288816,2
+82,Found Better Alternative,22,120.40101512660448,1
+83,Poor Customer Service,25,151.5170918430643,5
+84,Better Price Elsewhere,13,103.73701021106926,4
+85,Poor Customer Service,18,30.825621668141338,1
+86,Poor Customer Service,33,121.21342685802377,5
+87,Found Better Alternative,16,192.37255121096842,4
+88,Found Better Alternative,45,51.55452962437874,3
+89,Moved to Competitor,42,144.20088034771985,1
+90,Product Quality Issues,44,56.168063958630164,1
+91,Better Price Elsewhere,2,116.44898320515463,3
+92,Found Better Alternative,55,37.40176093640953,3
+93,Too Expensive,35,101.06676852647333,1
+94,Product Quality Issues,42,156.1093992011443,3
+95,Too Expensive,34,82.56287436301677,2
+96,Product Quality Issues,30,139.68411040769925,4
+97,Product Quality Issues,59,163.18099294215125,4
+98,Poor Customer Service,55,186.89200750630147,4
+99,Better Price Elsewhere,13,62.235574733981636,2
+100,Better Price Elsewhere,13,91.87686484567547,3
+101,Better Price Elsewhere,18,47.434882399475136,5
+102,Found Better Alternative,32,198.64703038850755,3
+103,Poor Customer Service,32,186.86017422637315,1
+104,Product Quality Issues,35,117.19228345050072,4
+105,Moved to Competitor,59,171.56599298775583,3
+106,Better Price Elsewhere,39,113.7724359089676,5
+107,Poor Customer Service,46,132.24542384049676,1
+108,Too Expensive,52,36.04239778088299,2
+109,Better Price Elsewhere,29,155.94867568942541,2
+110,Better Price Elsewhere,49,42.98842705434227,5
+111,Poor Customer Service,29,168.6921734454551,1
+112,Better Price Elsewhere,53,160.76505578066946,4
+113,Moved to Competitor,44,147.57404559373575,3
+114,Too Expensive,57,26.508868494457182,1
+115,Found Better Alternative,16,74.56310407015916,2
+116,Moved to Competitor,56,67.36026258395171,5
+117,Too Expensive,44,84.82455334487344,5
+118,Better Price Elsewhere,47,35.77569441749094,3
+119,Moved to Competitor,57,188.6524081455913,5
+120,Product Quality Issues,10,119.68440332822773,5
+121,Too Expensive,30,74.99437591844423,1
+122,Moved to Competitor,25,91.45667307337102,4
+123,Poor Customer Service,39,100.49645729087042,3
+124,Better Price Elsewhere,20,128.10698000491112,1
+125,Better Price Elsewhere,5,112.8222969853696,4
+126,Poor Customer Service,1,185.49055517859512,1
+127,Too Expensive,30,109.45342692304945,1
+128,Moved to Competitor,49,198.58844266819628,5
+129,Better Price Elsewhere,3,173.25649239411723,4
+130,Product Quality Issues,45,57.531892584320445,3
+131,Poor Customer Service,14,187.50713863590494,3
+132,Better Price Elsewhere,56,40.945951619385696,4
+133,Better Price Elsewhere,30,167.14094752841447,5
+134,Poor Customer Service,50,88.51219282578441,2
+135,Service Not Needed Anymore,4,178.0353776801125,1
+136,Poor Customer Service,18,176.25020421934107,5
+137,Product Quality Issues,37,165.0665720211718,4
+138,Found Better Alternative,25,162.20547853527106,1
+139,Poor Customer Service,48,74.84224503764734,3
+140,Service Not Needed Anymore,1,34.56547094922539,2
+141,Service Not Needed Anymore,53,92.53643217772907,3
+142,Poor Customer Service,46,51.234412697571564,4
+143,Product Quality Issues,15,145.0911960024431,1
+144,Poor Customer Service,9,82.2979507768014,4
+145,Poor Customer Service,15,195.6098361547847,1
+146,Better Price Elsewhere,49,135.37497392215977,5
+147,Found Better Alternative,57,168.04650145418498,2
+148,Product Quality Issues,24,43.854441093532714,5
+149,Better Price Elsewhere,4,175.16260680907206,5
+150,Poor Customer Service,12,186.096294292411,4
+151,Moved to Competitor,59,107.67114538740846,2
+152,Better Price Elsewhere,58,129.12552879517594,1
+153,Better Price Elsewhere,37,157.66576416253918,1
+154,Product Quality Issues,37,51.47095290687426,3
+155,Technical Issues,43,110.46189376341964,1
+156,Better Price Elsewhere,6,91.75934499901636,4
+157,Found Better Alternative,39,46.34731858920484,5
+158,Too Expensive,56,86.15619601247566,5
+159,Better Price Elsewhere,46,32.27101568938884,5
+160,Found Better Alternative,24,24.646143250907656,2
+161,Poor Customer Service,11,44.3299320478681,1
+162,Found Better Alternative,13,193.3607200860513,4
+163,Found Better Alternative,34,118.91531646110306,2
+164,Product Quality Issues,25,193.8479890075796,3
+165,Better Price Elsewhere,7,97.84961809942375,4
+166,Too Expensive,52,76.12690395534672,4
+167,Poor Customer Service,4,111.10553531124394,4
+168,Better Price Elsewhere,59,99.11210395392382,5
+169,Better Price Elsewhere,8,39.019643167113905,4
+170,Product Quality Issues,20,135.34873664423714,1
+171,Found Better Alternative,29,58.88687285172793,4
+172,Better Price Elsewhere,54,131.52583188160932,5
+173,Product Quality Issues,53,137.03619663166762,4
+174,Better Price Elsewhere,51,47.36447356315666,3
+175,Found Better Alternative,45,31.04293287992027,3
+176,Better Price Elsewhere,46,160.53708549231916,5
+177,Found Better Alternative,10,102.76407627847763,1
+178,Poor Customer Service,43,30.469483190985642,1
+179,Service Not Needed Anymore,34,199.07593709055809,2
+180,Better Price Elsewhere,57,30.400500979345995,5
+181,Poor Customer Service,26,145.10634119453957,4
+182,Better Price Elsewhere,41,197.06220654741446,5
+183,Moved to Competitor,49,63.05241875886661,2
+184,Moved to Competitor,58,45.604886363695314,5
+185,Poor Customer Service,3,41.849289096037204,5
+186,Found Better Alternative,56,74.5895265621672,2
+187,Too Expensive,6,38.1882459819164,1
+188,Product Quality Issues,5,144.58904150494374,4
+189,Product Quality Issues,5,31.212523663411286,2
+190,Better Price Elsewhere,54,111.69598306696214,3
+191,Better Price Elsewhere,47,199.40543369353583,1
+192,Moved to Competitor,23,166.51464851108338,3
+193,Moved to Competitor,49,130.73949888158197,1
+194,Found Better Alternative,9,75.1256517415901,4
+195,Poor Customer Service,35,132.30125053249492,4
+196,Poor Customer Service,20,114.86746350409729,5
+197,Found Better Alternative,58,96.69500910026687,3
+198,Moved to Competitor,49,43.52786781323591,1
+199,Moved to Competitor,59,179.58875874328402,4
+200,Too Expensive,42,100.96123678783805,2
+201,Found Better Alternative,35,55.032052127737714,4
+202,Better Price Elsewhere,50,86.19668315791213,2
+203,Better Price Elsewhere,18,94.54335545520686,1
+204,Moved to Competitor,17,168.95682120203736,4
+205,Found Better Alternative,24,152.05058850105237,4
+206,Better Price Elsewhere,3,158.47488085544117,1
+207,Better Price Elsewhere,32,21.985627597156498,4
+208,Found Better Alternative,35,94.90771967235708,2
+209,Better Price Elsewhere,38,106.64194729435825,4
+210,Better Price Elsewhere,13,23.454609828150204,3
+211,Product Quality Issues,56,66.76637757410616,5
+212,Found Better Alternative,47,156.8521681619843,2
+213,Found Better Alternative,25,44.67974703121983,3
+214,Better Price Elsewhere,9,116.3558236614665,1
+215,Found Better Alternative,4,58.73633696310275,2
+216,Better Price Elsewhere,14,22.181739435900788,5
+217,Poor Customer Service,37,63.41626236791747,5
+218,Found Better Alternative,34,195.6572758838097,1
+219,Found Better Alternative,11,164.27668013893813,1
+220,Too Expensive,41,192.723795977786,2
+221,Found Better Alternative,56,107.81372790674524,4
+222,Product Quality Issues,3,39.75251576195063,1
+223,Better Price Elsewhere,59,118.63270801526473,4
+224,Poor Customer Service,28,101.78792022079296,3
+225,Poor Customer Service,29,171.98427489313087,5
+226,Better Price Elsewhere,9,37.654864541164024,4
+227,Service Not Needed Anymore,3,107.88340466392007,5
+228,Poor Customer Service,25,47.00875964491716,4
+229,Moved to Competitor,34,78.4416668402108,3
+230,Found Better Alternative,12,152.72427392980393,1
+231,Too Expensive,42,105.68326328637798,3
+232,Product Quality Issues,9,87.65989132623848,1
+233,Product Quality Issues,15,91.00573014260635,1
+234,Product Quality Issues,40,102.70041831307759,5
+235,Better Price Elsewhere,25,161.30297789067023,3
+236,Found Better Alternative,5,180.5752440092422,4
+237,Poor Customer Service,11,191.9602435707071,3
+238,Better Price Elsewhere,59,161.6426095259531,5
+239,Found Better Alternative,34,76.77324123464228,1
+240,Better Price Elsewhere,24,143.86424709557758,5
+241,Service Not Needed Anymore,15,98.76856232997055,2
+242,Service Not Needed Anymore,38,65.84071196828921,2
+243,Moved to Competitor,8,171.35688429666607,4
+244,Poor Customer Service,59,26.916742813218498,5
+245,Better Price Elsewhere,5,182.31715858437624,4
+246,Moved to Competitor,48,103.06594363245215,4
+247,Poor Customer Service,26,134.69626582549049,2
+248,Service Not Needed Anymore,18,138.68370599704087,4
+249,Service Not Needed Anymore,6,181.12119332717654,2
+250,Moved to Competitor,37,134.6005427900973,1
+251,Poor Customer Service,48,130.50804525681113,5
+252,Poor Customer Service,13,31.997367300924193,4
+253,Moved to Competitor,28,113.31344395013673,2
+254,Poor Customer Service,5,47.030420147067495,3
+255,Better Price Elsewhere,13,152.7380783698674,4
+256,Product Quality Issues,17,112.1999457462814,1
+257,Service Not Needed Anymore,50,142.4410002575036,1
+258,Found Better Alternative,40,27.50112210842917,3
+259,Product Quality Issues,45,35.26256288824458,2
+260,Better Price Elsewhere,32,148.9382098512828,4
+261,Found Better Alternative,29,32.97518047976121,2
+262,Technical Issues,51,32.82621099774655,1
+263,Better Price Elsewhere,58,22.17952554227974,2
+264,Product Quality Issues,3,192.1702516939064,1
+265,Moved to Competitor,56,152.75150470262125,2
+266,Found Better Alternative,40,83.58525353037155,3
+267,Found Better Alternative,34,73.37640463177794,5
+268,Found Better Alternative,40,82.94658135425291,3
+269,Poor Customer Service,27,159.43763561261272,3
+270,Poor Customer Service,13,139.04670999267458,5
+271,Too Expensive,45,53.335202216144225,5
+272,Too Expensive,33,51.33968036013518,4
+273,Moved to Competitor,6,37.71121694841152,4
+274,Moved to Competitor,24,138.85448954624087,3
+275,Product Quality Issues,19,157.58707919991247,3
+276,Product Quality Issues,16,67.70835709850073,1
+277,Too Expensive,40,23.770092985564307,1
+278,Found Better Alternative,28,34.79090014575692,4
+279,Found Better Alternative,33,194.21480627210548,4
+280,Too Expensive,59,73.18005994593565,1
+281,Moved to Competitor,59,158.46016661086406,1
+282,Poor Customer Service,48,132.43944239376748,2
+283,Poor Customer Service,41,88.74913513752126,2
+284,Better Price Elsewhere,13,57.02370719519992,1
+285,Product Quality Issues,43,41.84955526869316,2
+286,Better Price Elsewhere,45,130.702334246996,5
+287,Product Quality Issues,25,159.43408051480185,4
+288,Product Quality Issues,53,135.90276563740352,4
+289,Poor Customer Service,42,115.45438398484849,1
+290,Product Quality Issues,36,27.551220217694528,3
+291,Better Price Elsewhere,27,194.3279799669891,1
+292,Better Price Elsewhere,38,163.76855449782343,2
+293,Too Expensive,7,72.70796660617366,3
+294,Poor Customer Service,5,196.3946592845931,2
+295,Better Price Elsewhere,43,128.33868613453797,5
+296,Product Quality Issues,45,124.83607847730437,2
+297,Too Expensive,58,154.6531722973158,5
+298,Better Price Elsewhere,57,166.11856185622477,5
+299,Found Better Alternative,51,138.16614931967047,2
+300,Better Price Elsewhere,31,43.057234345916,2
+301,Better Price Elsewhere,23,80.88815107900972,5
+302,Product Quality Issues,42,187.05505525868895,3
+303,Product Quality Issues,10,60.430810131893345,5
+304,Found Better Alternative,32,86.9900642907524,4
+305,Found Better Alternative,43,97.77383892995528,5
+306,Service Not Needed Anymore,53,99.0928981450014,3
+307,Product Quality Issues,30,130.3291248490146,4
+308,Poor Customer Service,39,189.75365079404736,1
+309,Too Expensive,31,63.32468812985089,1
+310,Poor Customer Service,18,41.870247734165254,3
+311,Poor Customer Service,36,55.54468817478872,5
+312,Better Price Elsewhere,2,179.6464820376685,2
+313,Better Price Elsewhere,14,136.2459462779371,3
+314,Service Not Needed Anymore,13,71.46322206304882,4
+315,Too Expensive,29,166.8704490143511,4
+316,Found Better Alternative,12,175.04659934541849,1
+317,Poor Customer Service,39,172.37258096425003,4
+318,Better Price Elsewhere,2,185.4067760551198,3
+319,Better Price Elsewhere,32,65.40338363120509,4
+320,Poor Customer Service,13,155.9075471743301,3
+321,Product Quality Issues,46,102.8971095093452,2
+322,Found Better Alternative,27,171.55973952021108,1
+323,Found Better Alternative,49,151.1283218890904,4
+324,Poor Customer Service,41,159.76054036995043,3
+325,Service Not Needed Anymore,17,138.10913078259287,5
+326,Found Better Alternative,40,51.937178504547234,1
+327,Product Quality Issues,31,118.1048454014489,2
+328,Found Better Alternative,34,197.24055311441148,3
+329,Poor Customer Service,24,188.72985196948142,2
+330,Better Price Elsewhere,45,27.771272443462102,2
+331,Poor Customer Service,35,49.666666831298684,4
+332,Too Expensive,48,43.71117922182114,4
+333,Better Price Elsewhere,6,150.6763837973532,3
+334,Better Price Elsewhere,19,167.2013593742501,5
+335,Better Price Elsewhere,30,58.43204593592095,3
+336,Better Price Elsewhere,7,111.05348473132922,5
+337,Moved to Competitor,10,171.326545042016,2
+338,Found Better Alternative,41,151.9042780579251,1
+339,Product Quality Issues,32,117.60269698853268,3
+340,Better Price Elsewhere,34,126.26258428257913,3
+341,Product Quality Issues,28,111.50489844493039,5
+342,Product Quality Issues,15,73.5587212373877,2
+343,Better Price Elsewhere,30,121.7039587146229,2
+344,Poor Customer Service,37,143.99935436901632,5
+345,Poor Customer Service,29,177.19812485494538,2
+346,Found Better Alternative,22,134.53244371626465,4
+347,Found Better Alternative,4,157.00187666776844,1
+348,Better Price Elsewhere,20,48.81289429182314,3
+349,Poor Customer Service,32,103.08034539556218,1
+350,Found Better Alternative,36,21.679691568876795,3
+351,Product Quality Issues,50,64.40219561389215,4
+352,Moved to Competitor,4,150.76310872034088,2
+353,Found Better Alternative,27,198.52579124288542,5
+354,Better Price Elsewhere,17,37.852057925698865,4
+355,Better Price Elsewhere,12,92.26897685503188,1
+356,Found Better Alternative,22,164.0127743658487,5
+357,Better Price Elsewhere,17,56.726414233201794,2
+358,Product Quality Issues,10,119.91529087441153,4
+359,Service Not Needed Anymore,54,151.95283328534146,5
+360,Product Quality Issues,1,130.87738104683223,4
+361,Poor Customer Service,22,53.844452230774905,4
+362,Found Better Alternative,26,83.96922236343309,2
+363,Product Quality Issues,56,161.08252120737149,3
+364,Product Quality Issues,59,119.760772543763,5
+365,Service Not Needed Anymore,18,20.941330437724293,2
+366,Poor Customer Service,50,156.9783368050569,4
+367,Service Not Needed Anymore,14,26.356043889243033,2
+368,Moved to Competitor,47,154.2320808916218,3
+369,Better Price Elsewhere,29,56.44650082974273,5
+370,Better Price Elsewhere,12,192.45322642148844,3
+371,Better Price Elsewhere,36,86.22933523437521,1
+372,Better Price Elsewhere,59,78.84769094085424,5
+373,Better Price Elsewhere,35,46.79984905984004,3
+374,Found Better Alternative,52,75.00875878823868,4
+375,Better Price Elsewhere,12,177.7971371290761,5
+376,Poor Customer Service,7,199.34018077290452,5
+377,Too Expensive,29,86.2957154912327,2
+378,Better Price Elsewhere,11,100.74991357181766,4
+379,Too Expensive,33,149.97276887649267,1
+380,Poor Customer Service,6,179.51524048371343,3
+381,Better Price Elsewhere,47,126.74798015362114,2
+382,Found Better Alternative,15,90.47462567200928,3
+383,Found Better Alternative,32,94.27193135275228,1
+384,Moved to Competitor,51,145.21126636942523,1
+385,Found Better Alternative,11,20.579287448770163,5
+386,Too Expensive,58,131.5260807427713,1
+387,Poor Customer Service,23,83.98874187944433,3
+388,Better Price Elsewhere,26,162.95551962987517,4
+389,Too Expensive,34,36.73831516816379,4
+390,Too Expensive,46,125.8764080507103,5
+391,Technical Issues,34,106.57512017950228,3
+392,Poor Customer Service,29,135.61859466294092,3
+393,Poor Customer Service,4,31.673647006934303,1
+394,Too Expensive,17,124.39708173706363,3
+395,Poor Customer Service,35,121.06722583271427,2
+396,Service Not Needed Anymore,13,120.91881699491077,1
+397,Moved to Competitor,41,128.62777998736186,2
+398,Poor Customer Service,39,141.7642287007452,5
+399,Too Expensive,15,164.89801994253855,4
+400,Too Expensive,55,68.56772962307858,5
+401,Better Price Elsewhere,29,168.50889383241116,4
+402,Moved to Competitor,29,109.68602280742165,5
+403,Product Quality Issues,11,33.87049024417961,3
+404,Too Expensive,52,30.539167263916255,2
+405,Poor Customer Service,32,80.16289736529095,4
+406,Moved to Competitor,2,161.28145588006416,1
+407,Poor Customer Service,47,147.38256825336484,2
+408,Better Price Elsewhere,14,161.95069364103315,1
+409,Moved to Competitor,20,113.10843015948969,2
+410,Better Price Elsewhere,22,99.2358196319883,2
+411,Poor Customer Service,11,46.54145480713111,5
+412,Service Not Needed Anymore,27,79.07469564967607,4
+413,Service Not Needed Anymore,3,98.12348591129755,4
+414,Product Quality Issues,17,35.9480773423311,2
+415,Found Better Alternative,44,59.71015148801803,3
+416,Poor Customer Service,56,127.68055293147299,3
+417,Poor Customer Service,28,152.41936056305417,1
+418,Poor Customer Service,29,199.70255205073093,1
+419,Found Better Alternative,21,187.96039964184038,5
+420,Too Expensive,47,135.66173591633446,2
+421,Too Expensive,16,95.82464959293296,1
+422,Too Expensive,37,134.5119256474819,1
+423,Better Price Elsewhere,59,161.41729125444175,2
+424,Product Quality Issues,20,41.30051436620972,5
+425,Better Price Elsewhere,6,93.78288014533189,1
+426,Product Quality Issues,19,171.1644114144111,5
+427,Poor Customer Service,57,89.08993134794792,4
+428,Moved to Competitor,5,122.93700882089358,5
+429,Poor Customer Service,3,125.79848495519568,3
+430,Better Price Elsewhere,59,53.205725564055086,3
+431,Better Price Elsewhere,1,85.20237949741191,5
+432,Too Expensive,58,80.21203197354778,3
+433,Found Better Alternative,38,24.715407535771664,4
+434,Better Price Elsewhere,15,24.354517500443944,2
+435,Better Price Elsewhere,34,169.70546786163922,3
+436,Found Better Alternative,35,69.15274579510623,3
+437,Better Price Elsewhere,49,113.25417792298678,5
+438,Too Expensive,25,73.77060324597915,4
+439,Found Better Alternative,24,189.3222641207613,2
+440,Better Price Elsewhere,12,66.67341659583927,5
+441,Better Price Elsewhere,18,97.33822629300832,5
+442,Technical Issues,15,177.09144508722832,4
+443,Poor Customer Service,44,171.54804202252555,2
+444,Poor Customer Service,16,53.498255212329916,4
+445,Too Expensive,27,164.47579576322786,2
+446,Service Not Needed Anymore,8,102.47363961282068,4
+447,Technical Issues,46,106.93439697536394,5
+448,Too Expensive,25,44.02639503486988,5
+449,Poor Customer Service,17,34.508272476282436,1
+450,Better Price Elsewhere,29,151.02907525527775,3
+451,Too Expensive,53,109.36300742395396,4
+452,Product Quality Issues,8,98.63312647073232,1
+453,Poor Customer Service,15,151.31148115743142,3
+454,Moved to Competitor,27,157.79232181839976,4
+455,Better Price Elsewhere,46,48.60347018048364,2
+456,Product Quality Issues,50,129.84052690597542,3
+457,Better Price Elsewhere,52,44.3637348099834,5
+458,Product Quality Issues,7,155.24751548522823,1
+459,Better Price Elsewhere,3,138.25192812808513,3
+460,Better Price Elsewhere,29,192.19063179502243,3
+461,Better Price Elsewhere,44,32.41244294415581,5
+462,Found Better Alternative,53,30.26984980722578,4
+463,Found Better Alternative,24,70.79367344477603,2
+464,Product Quality Issues,58,67.10702307246308,5
+465,Service Not Needed Anymore,3,64.45618383295997,2
+466,Poor Customer Service,20,183.1258244937866,4
+467,Poor Customer Service,46,64.9183159729111,3
+468,Moved to Competitor,15,68.95095070315358,2
+469,Better Price Elsewhere,25,156.69168723523347,1
+470,Service Not Needed Anymore,30,100.9531716410972,1
+471,Better Price Elsewhere,14,159.8079002519326,5
+472,Service Not Needed Anymore,7,31.765908361589343,4
+473,Better Price Elsewhere,17,107.76281486120918,5
+474,Moved to Competitor,44,26.050448032990875,5
+475,Product Quality Issues,20,31.277576621963814,5
+476,Technical Issues,36,183.15874160199397,1
+477,Better Price Elsewhere,9,45.06416680116713,1
+478,Product Quality Issues,38,115.83572280953908,5
+479,Service Not Needed Anymore,48,93.99720846812718,1
+480,Product Quality Issues,57,82.52179872659168,4
+481,Found Better Alternative,22,181.97000222370903,5
+482,Found Better Alternative,54,23.92821141958811,1
+483,Product Quality Issues,53,139.48214351160604,2
+484,Found Better Alternative,53,193.41099815843907,5
+485,Product Quality Issues,2,120.83027302313155,5
+486,Moved to Competitor,24,188.62804316595654,4
+487,Better Price Elsewhere,8,29.406418271484277,3
+488,Poor Customer Service,11,95.38279743334905,3
+489,Service Not Needed Anymore,13,66.82840237316921,4
+490,Moved to Competitor,17,151.54777369653135,4
+491,Product Quality Issues,8,196.63347628950442,4
+492,Found Better Alternative,21,66.1754112399646,3
+493,Poor Customer Service,18,137.7514282653334,4
+494,Better Price Elsewhere,30,55.65757389675322,1
+495,Product Quality Issues,18,121.75944582288979,5
+496,Poor Customer Service,46,103.50784760390052,5
+497,Product Quality Issues,47,194.96095933367667,2
+498,Better Price Elsewhere,31,129.53490908536398,2
+499,Service Not Needed Anymore,38,82.91114697562737,5
+500,Technical Issues,32,40.53724127982801,1
+501,Found Better Alternative,11,47.22442917228822,3
+502,Product Quality Issues,45,60.55704739122232,3
+503,Poor Customer Service,25,65.17399904125364,1
+504,Too Expensive,33,173.1108904114048,3
+505,Found Better Alternative,38,121.02010189085449,4
+506,Better Price Elsewhere,41,114.21036404738597,5
+507,Moved to Competitor,8,40.65839693645914,5
+508,Too Expensive,11,174.8251448028983,1
+509,Service Not Needed Anymore,22,150.10657457752706,3
+510,Found Better Alternative,51,32.180305142000286,2
+511,Found Better Alternative,24,147.41031750135835,2
+512,Poor Customer Service,41,117.83687912167629,3
+513,Service Not Needed Anymore,17,34.71056223442009,2
+514,Moved to Competitor,12,102.49411547515817,1
+515,Better Price Elsewhere,57,107.24533168340845,1
+516,Better Price Elsewhere,46,49.83941722938964,3
+517,Poor Customer Service,32,190.22566646005083,2
+518,Too Expensive,15,172.99556686651914,1
+519,Technical Issues,16,140.4240207192395,1
+520,Better Price Elsewhere,54,103.21320098010929,4
+521,Product Quality Issues,22,94.11779748521153,4
+522,Poor Customer Service,28,137.17522408717176,1
+523,Service Not Needed Anymore,20,118.17773649324299,3
+524,Too Expensive,33,31.20915905873941,5
+525,Too Expensive,10,112.2504767786597,5
+526,Product Quality Issues,40,165.15265110191112,1
+527,Poor Customer Service,32,102.66317796745246,1
+528,Poor Customer Service,50,29.352183959768315,1
+529,Better Price Elsewhere,33,161.53007588912595,3
+530,Moved to Competitor,2,56.24548078447539,4
+531,Too Expensive,33,66.55175027984698,1
+532,Technical Issues,33,49.64714361781326,1
+533,Technical Issues,41,79.43871167686956,2
+534,Product Quality Issues,13,156.2152710239543,3
+535,Too Expensive,30,113.48945471070873,1
+536,Service Not Needed Anymore,33,56.87862934712826,2
+537,Too Expensive,13,178.00941406736735,5
+538,Better Price Elsewhere,52,178.32473389127526,1
+539,Product Quality Issues,26,176.70411650828123,1
+540,Better Price Elsewhere,22,62.98331804867707,2
+541,Service Not Needed Anymore,39,101.22308195257786,3
+542,Found Better Alternative,2,197.2981381053575,1
+543,Better Price Elsewhere,38,158.96224573579826,5
+544,Found Better Alternative,39,24.89013582060077,1
+545,Found Better Alternative,26,31.73682642688857,5
+546,Poor Customer Service,46,103.5076478262199,4
+547,Better Price Elsewhere,58,183.65963705508082,4
+548,Found Better Alternative,50,116.96632363148856,5
+549,Product Quality Issues,15,109.60625144617224,3
+550,Too Expensive,34,38.985265992193504,1
+551,Product Quality Issues,42,138.22041885037294,1
+552,Moved to Competitor,55,167.9785689080406,4
+553,Product Quality Issues,44,88.47560135136122,5
+554,Product Quality Issues,49,159.61013316655894,1
+555,Moved to Competitor,40,193.60579770214608,1
+556,Poor Customer Service,11,56.677962642984035,3
+557,Better Price Elsewhere,3,114.19933361505343,2
+558,Better Price Elsewhere,59,71.6848324552236,4
+559,Too Expensive,6,162.71379542609108,4
+560,Found Better Alternative,9,123.96680585860835,2
+561,Found Better Alternative,6,134.22483515905466,1
+562,Better Price Elsewhere,9,163.62454873086094,3
+563,Better Price Elsewhere,39,91.27468507924188,3
+564,Better Price Elsewhere,31,184.7162123132678,4
+565,Poor Customer Service,32,115.9451961043052,3
+566,Product Quality Issues,41,48.43186811036264,2
+567,Poor Customer Service,50,145.26184127038445,1
+568,Poor Customer Service,12,162.7870430788858,2
+569,Moved to Competitor,8,77.0171018721548,5
+570,Poor Customer Service,8,174.29226625977554,4
+571,Product Quality Issues,50,183.10578585783796,3
+572,Too Expensive,28,69.84280772800561,5
+573,Poor Customer Service,20,197.03386508873996,3
+574,Found Better Alternative,47,45.32807504877651,1
+575,Moved to Competitor,59,56.36282031244819,1
+576,Service Not Needed Anymore,7,53.16047106284471,1
+577,Better Price Elsewhere,11,180.91814780141667,3
+578,Moved to Competitor,20,137.77265941849313,5
+579,Product Quality Issues,16,47.378770980009115,1
+580,Poor Customer Service,4,99.25821530630282,5
+581,Product Quality Issues,6,130.75364451256436,3
+582,Technical Issues,58,35.023535298088994,5
+583,Product Quality Issues,22,178.83494631332098,3
+584,Poor Customer Service,26,164.64863637947633,3
+585,Found Better Alternative,3,110.93721924379489,4
+586,Better Price Elsewhere,41,194.0827907466507,3
+587,Better Price Elsewhere,42,95.19697626951795,3
+588,Better Price Elsewhere,14,197.13985742656962,2
+589,Better Price Elsewhere,11,140.22559978465287,1
+590,Better Price Elsewhere,18,134.24082918570946,4
+591,Better Price Elsewhere,54,49.8718811532413,4
+592,Found Better Alternative,12,178.7469964948359,4
+593,Better Price Elsewhere,23,96.94814382571073,2
+594,Poor Customer Service,12,49.20201304084628,3
+595,Moved to Competitor,13,22.269353595636627,1
+596,Product Quality Issues,25,120.75602305490887,5
+597,Found Better Alternative,45,114.93193198208174,3
+598,Better Price Elsewhere,51,149.48365202644854,2
+599,Better Price Elsewhere,58,180.2464495432044,3
+600,Better Price Elsewhere,19,34.29318523574531,3
+601,Better Price Elsewhere,55,151.66936826126522,2
+602,Poor Customer Service,46,53.7341499375648,4
+603,Better Price Elsewhere,36,174.47186956828952,4
+604,Better Price Elsewhere,45,167.4314324950981,1
+605,Better Price Elsewhere,8,117.34287589739799,1
+606,Product Quality Issues,29,147.84370375219606,4
+607,Better Price Elsewhere,55,76.58302037307472,5
+608,Poor Customer Service,53,104.81022180790663,3
+609,Product Quality Issues,55,167.8946415878849,5
+610,Found Better Alternative,32,102.6677354911785,3
+611,Better Price Elsewhere,51,84.40368775857952,4
+612,Too Expensive,44,108.95824050505398,1
+613,Found Better Alternative,18,169.0848654386993,1
+614,Better Price Elsewhere,6,80.33744852675709,5
+615,Moved to Competitor,18,51.27708676443388,1
+616,Moved to Competitor,19,148.16252365954054,4
+617,Better Price Elsewhere,22,168.67607828745471,5
+618,Poor Customer Service,37,38.114746134236,3
+619,Too Expensive,32,63.17734029607005,1
+620,Found Better Alternative,56,45.5549581569789,2
+621,Better Price Elsewhere,41,82.62945408479,1
+622,Better Price Elsewhere,59,101.06317620297428,3
+623,Poor Customer Service,3,154.78874065339517,5
+624,Product Quality Issues,28,137.20656527870133,3
+625,Found Better Alternative,10,131.7671421461176,2
+626,Poor Customer Service,51,83.4274903897378,4
+627,Product Quality Issues,35,171.4605595552568,1
+628,Found Better Alternative,29,104.83169013166962,5
+629,Better Price Elsewhere,54,196.23888884272782,4
+630,Poor Customer Service,15,134.14558489323264,3
+631,Found Better Alternative,33,42.727653481610496,5
+632,Moved to Competitor,7,141.71196117357812,4
+633,Product Quality Issues,12,78.51872277770582,5
+634,Product Quality Issues,49,143.53889540349755,2
+635,Better Price Elsewhere,30,32.53540666923303,2
+636,Poor Customer Service,21,51.47865869167269,1
+637,Product Quality Issues,31,174.03270660304153,1
+638,Better Price Elsewhere,58,60.89232026423268,2
+639,Poor Customer Service,24,170.6674025437292,5
+640,Poor Customer Service,20,70.26969592179388,2
+641,Better Price Elsewhere,37,135.7187438105674,1
+642,Poor Customer Service,4,144.94710323176957,2
+643,Better Price Elsewhere,28,112.27785556610952,2
+644,Poor Customer Service,44,74.95592180541163,5
+645,Better Price Elsewhere,20,58.2759877467973,4
+646,Moved to Competitor,24,25.974083821236718,1
+647,Product Quality Issues,50,74.71035222333029,5
+648,Found Better Alternative,49,137.56930229563093,2
+649,Too Expensive,51,188.8948673207269,2
+650,Product Quality Issues,32,176.81680680734937,4
+651,Better Price Elsewhere,41,157.89165977635446,1
+652,Product Quality Issues,36,161.92052178559376,1
+653,Product Quality Issues,58,139.69728262567915,3
+654,Found Better Alternative,53,66.85163436188054,1
+655,Poor Customer Service,34,183.29510552704937,4
+656,Better Price Elsewhere,36,140.73181614305014,3
+657,Poor Customer Service,2,120.87931357647919,3
+658,Poor Customer Service,15,39.97810445842659,2
+659,Found Better Alternative,34,100.46999788515657,2
+660,Product Quality Issues,36,102.86448881634674,1
+661,Poor Customer Service,6,175.6214497140806,3
+662,Technical Issues,39,118.39667963380192,2
+663,Found Better Alternative,42,88.47209881467374,4
+664,Better Price Elsewhere,51,195.8240591319187,2
+665,Better Price Elsewhere,51,39.929706798736824,2
+666,Better Price Elsewhere,58,96.05871709615003,3
+667,Better Price Elsewhere,54,27.564441530852953,3
+668,Better Price Elsewhere,12,153.18274173804747,5
+669,Better Price Elsewhere,3,185.25377939584712,4
+670,Poor Customer Service,45,70.4067193190881,3
+671,Better Price Elsewhere,18,174.50150182384175,1
+672,Moved to Competitor,40,72.5992814831416,4
+673,Better Price Elsewhere,21,183.93862909590473,4
+674,Product Quality Issues,15,155.7131426474211,3
+675,Poor Customer Service,33,164.88321983145894,4
+676,Technical Issues,35,23.24118000808181,3
+677,Better Price Elsewhere,26,193.30586427332466,2
+678,Poor Customer Service,8,150.80077857265817,5
+679,Service Not Needed Anymore,36,74.855197169504,2
+680,Moved to Competitor,48,169.29103967459244,3
+681,Too Expensive,30,70.6738157146874,3
+682,Poor Customer Service,23,177.09569112190303,2
+683,Better Price Elsewhere,42,40.264470274148664,1
+684,Found Better Alternative,44,146.66347594294322,1
+685,Moved to Competitor,14,117.32572579608386,1
+686,Product Quality Issues,14,37.37620463517935,3
+687,Product Quality Issues,2,63.540889086591015,4
+688,Poor Customer Service,55,22.23272652991666,3
+689,Too Expensive,37,104.37823378361105,4
+690,Better Price Elsewhere,5,74.22774693680007,2
+691,Poor Customer Service,38,127.70434717359659,5
+692,Poor Customer Service,45,73.50280538755109,4
+693,Product Quality Issues,41,73.98544007125724,1
+694,Better Price Elsewhere,54,153.7747757716886,3
+695,Better Price Elsewhere,47,28.66571047610362,2
+696,Found Better Alternative,14,182.52109913455772,1
+697,Poor Customer Service,56,173.40749739041266,2
+698,Product Quality Issues,39,140.20484298075317,5
+699,Better Price Elsewhere,25,126.77988261932917,3
+700,Product Quality Issues,20,180.6144496651374,3
+701,Product Quality Issues,2,53.3594323151686,5
+702,Better Price Elsewhere,39,34.21444919434915,3
+703,Poor Customer Service,6,63.11183058371686,4
+704,Better Price Elsewhere,17,163.02409016603426,2
+705,Better Price Elsewhere,59,26.240648010766996,1
+706,Technical Issues,25,124.90523031502813,5
+707,Poor Customer Service,57,199.1787529144358,4
+708,Too Expensive,28,174.0252968907571,1
+709,Poor Customer Service,2,113.8602240278461,1
+710,Found Better Alternative,35,31.45536367159562,5
+711,Too Expensive,37,169.64723258942777,4
+712,Product Quality Issues,5,127.8161314718979,1
+713,Product Quality Issues,1,40.68793947072203,1
+714,Poor Customer Service,40,36.89431126820411,4
+715,Poor Customer Service,12,183.73282749858663,3
+716,Moved to Competitor,56,140.4560473288541,1
+717,Too Expensive,36,169.271623877016,2
+718,Service Not Needed Anymore,45,178.2162020508081,4
+719,Better Price Elsewhere,23,122.91902336869799,1
+720,Found Better Alternative,47,113.14034331590743,5
+721,Service Not Needed Anymore,31,97.47693385777823,2
+722,Better Price Elsewhere,11,77.05038580240146,1
+723,Better Price Elsewhere,10,98.22727295456812,2
+724,Found Better Alternative,3,159.29833803142816,2
+725,Product Quality Issues,54,128.34621758272368,3
+726,Too Expensive,14,180.65419219187228,2
+727,Better Price Elsewhere,16,99.80840258825378,3
+728,Too Expensive,10,129.27612416937572,4
+729,Better Price Elsewhere,29,133.63535955655797,3
+730,Better Price Elsewhere,10,126.5054892151386,5
+731,Better Price Elsewhere,12,146.47407915539293,1
+732,Too Expensive,30,62.73802430746513,4
+733,Found Better Alternative,41,112.22547995824232,4
+734,Product Quality Issues,1,38.76046450550258,5
+735,Poor Customer Service,5,89.21203897606625,3
+736,Moved to Competitor,20,107.7800723518276,1
+737,Poor Customer Service,8,137.40036671818504,3
+738,Too Expensive,43,191.09558946551664,2
+739,Poor Customer Service,12,128.11719197870406,3
+740,Poor Customer Service,1,153.84690491178077,4
+741,Product Quality Issues,57,111.1278907091365,1
+742,Poor Customer Service,54,134.13872564773965,3
+743,Found Better Alternative,20,32.767798904079214,1
+744,Product Quality Issues,28,65.79048455153246,1
+745,Better Price Elsewhere,57,85.13355677692496,2
+746,Moved to Competitor,43,105.04880390117245,2
+747,Poor Customer Service,37,28.21677419042907,4
+748,Product Quality Issues,47,45.204337559597185,5
+749,Moved to Competitor,37,69.82657540243504,1
+750,Found Better Alternative,12,194.8758843621891,5
+751,Better Price Elsewhere,37,79.64246127854913,4
+752,Service Not Needed Anymore,49,106.76739046017485,1
+753,Found Better Alternative,49,55.29758829291073,1
+754,Poor Customer Service,56,129.94041279363827,5
+755,Better Price Elsewhere,44,70.52297879287538,3
+756,Too Expensive,56,57.25866411891682,2
+757,Found Better Alternative,28,112.98307312027623,3
+758,Product Quality Issues,47,20.991043848875748,5
+759,Moved to Competitor,15,21.37952587686056,2
+760,Too Expensive,6,59.4323856383344,3
+761,Better Price Elsewhere,44,26.609845250147806,2
+762,Poor Customer Service,59,39.44463574352445,1
+763,Better Price Elsewhere,20,80.99491688097528,3
+764,Found Better Alternative,50,164.4654223243663,2
+765,Better Price Elsewhere,14,122.96875580647415,2
+766,Product Quality Issues,2,112.28019067215496,2
+767,Too Expensive,9,72.82798817746189,3
+768,Moved to Competitor,37,187.71566949790696,4
+769,Poor Customer Service,20,91.4627074226945,3
+770,Too Expensive,26,35.67669802323887,5
+771,Better Price Elsewhere,29,131.07197290120422,3
+772,Too Expensive,1,40.490910825788255,2
+773,Better Price Elsewhere,55,82.14016570430458,1
+774,Poor Customer Service,35,111.3341489692056,3
+775,Too Expensive,6,177.36005444333165,3
+776,Better Price Elsewhere,37,108.83838446122137,2
+777,Better Price Elsewhere,53,146.40657788569956,1
+778,Found Better Alternative,59,198.70703101983267,1
+779,Found Better Alternative,5,43.66804158163669,5
+780,Found Better Alternative,33,69.45167459351352,3
+781,Found Better Alternative,49,91.02369360757635,1
+782,Product Quality Issues,51,95.92907213698965,1
+783,Poor Customer Service,14,93.98379354779824,4
+784,Poor Customer Service,12,183.36998046017987,4
+785,Better Price Elsewhere,42,148.52587600403416,1
+786,Moved to Competitor,20,129.42293853632668,5
+787,Product Quality Issues,53,75.68708921530077,1
+788,Poor Customer Service,50,168.28226915983305,2
+789,Product Quality Issues,24,191.91089206729802,3
+790,Service Not Needed Anymore,59,167.81569085904079,5
+791,Better Price Elsewhere,43,20.281718934465122,2
+792,Product Quality Issues,34,134.55224663301325,5
+793,Product Quality Issues,25,29.20436865957813,2
+794,Found Better Alternative,50,66.36929966006993,3
+795,Better Price Elsewhere,29,30.714446062598903,3
+796,Moved to Competitor,57,128.68318153088978,4
+797,Service Not Needed Anymore,39,143.5861844286692,2
+798,Product Quality Issues,31,40.60777485186292,4
+799,Found Better Alternative,56,89.09099894809631,2
+800,Moved to Competitor,47,102.12257161199756,4
+801,Found Better Alternative,43,86.42954391696499,3
+802,Better Price Elsewhere,50,41.78450008733475,5
+803,Product Quality Issues,23,95.41060223374558,4
+804,Found Better Alternative,44,155.21204860551526,2
+805,Poor Customer Service,38,32.78137961598598,2
+806,Found Better Alternative,20,34.43240253474262,3
+807,Service Not Needed Anymore,23,83.85883253047716,2
+808,Moved to Competitor,45,189.51062809140652,1
+809,Product Quality Issues,52,140.34307641012452,5
+810,Better Price Elsewhere,16,142.16059220106166,4
+811,Technical Issues,50,85.14559835081569,5
+812,Too Expensive,42,126.85894241753692,3
+813,Better Price Elsewhere,55,21.82361312499381,4
+814,Moved to Competitor,8,134.4972883537176,4
+815,Moved to Competitor,50,184.3916505637226,1
+816,Product Quality Issues,21,130.26322430206744,3
+817,Product Quality Issues,1,177.2657468239421,2
+818,Poor Customer Service,55,150.31514998389687,1
+819,Better Price Elsewhere,8,41.70051495266424,1
+820,Poor Customer Service,29,182.44159531145152,5
+821,Too Expensive,32,31.95989198403948,5
+822,Better Price Elsewhere,38,116.11414505859749,5
+823,Poor Customer Service,5,45.58468228282238,1
+824,Poor Customer Service,47,22.107189931562733,2
+825,Product Quality Issues,22,95.96616682297503,4
+826,Moved to Competitor,47,73.10732737774812,5
+827,Poor Customer Service,34,107.48008888356854,2
+828,Poor Customer Service,1,123.89597961221915,3
+829,Found Better Alternative,55,27.873033015610524,5
+830,Product Quality Issues,55,42.14059312227421,4
+831,Better Price Elsewhere,26,120.55563136107656,3
+832,Product Quality Issues,43,81.77012357107849,3
+833,Better Price Elsewhere,10,151.25122775890063,4
+834,Better Price Elsewhere,30,137.41249674654915,5
+835,Product Quality Issues,50,172.20878533818322,1
+836,Poor Customer Service,18,144.64870880046055,4
+837,Moved to Competitor,17,97.38759393022666,4
+838,Poor Customer Service,26,141.13399203099783,4
+839,Product Quality Issues,8,69.56861136597533,3
+840,Found Better Alternative,47,75.13642978007829,2
+841,Better Price Elsewhere,40,162.0173287857428,1
+842,Found Better Alternative,49,100.3555129522848,5
+843,Better Price Elsewhere,12,163.70846129330346,5
+844,Service Not Needed Anymore,27,168.03602726029013,2
+845,Better Price Elsewhere,8,174.36122077903107,4
+846,Poor Customer Service,25,184.9943424514173,1
+847,Better Price Elsewhere,46,97.57733969239332,5
+848,Technical Issues,4,77.39602729780499,5
+849,Product Quality Issues,33,124.7957743869405,4
+850,Product Quality Issues,1,86.81103621877297,2
+851,Better Price Elsewhere,19,128.19335002404193,1
+852,Found Better Alternative,31,147.00545527588844,2
+853,Better Price Elsewhere,16,143.91290332858463,2
+854,Moved to Competitor,14,87.41951966362184,1
+855,Better Price Elsewhere,53,50.03483630577551,1
+856,Better Price Elsewhere,48,97.49528092319736,5
+857,Better Price Elsewhere,5,45.66694593474357,5
+858,Product Quality Issues,41,180.2174663330855,1
+859,Product Quality Issues,26,82.25794293281433,3
+860,Better Price Elsewhere,28,47.80275450019828,5
+861,Too Expensive,2,24.58059678303516,3
+862,Product Quality Issues,50,136.24802953156717,1
+863,Product Quality Issues,6,134.64241714185377,5
+864,Poor Customer Service,9,81.3087499846325,2
+865,Poor Customer Service,33,32.90813999257718,1
+866,Product Quality Issues,41,93.73320108114176,4
+867,Better Price Elsewhere,25,76.01914911141084,3
+868,Better Price Elsewhere,48,141.8817151523017,1
+869,Moved to Competitor,13,129.04026490148425,1
+870,Service Not Needed Anymore,9,85.6268710755572,5
+871,Poor Customer Service,53,59.22065976589822,5
+872,Poor Customer Service,13,197.84647390800654,5
+873,Found Better Alternative,31,101.72029181530067,4
+874,Poor Customer Service,41,143.88936244044268,5
+875,Better Price Elsewhere,11,45.29953416410494,1
+876,Better Price Elsewhere,4,107.40614593869161,5
+877,Found Better Alternative,34,24.956609576503787,2
+878,Found Better Alternative,38,110.98192122388099,5
+879,Better Price Elsewhere,46,193.52313328118643,4
+880,Better Price Elsewhere,4,89.15720833744405,2
+881,Better Price Elsewhere,38,27.019282263484087,1
+882,Found Better Alternative,19,25.572042365481835,1
+883,Better Price Elsewhere,6,89.83761679043651,3
+884,Better Price Elsewhere,34,48.80448856337493,2
+885,Too Expensive,18,24.203377339073462,3
+886,Better Price Elsewhere,13,156.11845051103182,2
+887,Found Better Alternative,41,102.53414159874032,2
+888,Better Price Elsewhere,23,72.06405895507781,4
+889,Better Price Elsewhere,19,182.01497294296652,3
+890,Better Price Elsewhere,45,40.90501283609461,4
+891,Found Better Alternative,11,192.06538921195747,2
+892,Moved to Competitor,1,76.51400912792352,1
+893,Too Expensive,24,179.91266101556263,2
+894,Poor Customer Service,54,128.52971776630307,4
+895,Found Better Alternative,7,168.80732475346775,3
+896,Better Price Elsewhere,25,197.12236937788356,3
+897,Poor Customer Service,21,71.91297880737423,4
+898,Moved to Competitor,15,193.00438737336674,3
+899,Better Price Elsewhere,1,90.10674108243566,5
+900,Better Price Elsewhere,12,89.39214285264602,1
+901,Better Price Elsewhere,58,81.26967876581102,1
+902,Better Price Elsewhere,7,117.45336932256534,1
+903,Better Price Elsewhere,15,47.74610777212768,3
+904,Product Quality Issues,21,119.66806736444201,3
+905,Poor Customer Service,19,117.50686623380072,2
+906,Moved to Competitor,29,157.1423262688766,2
+907,Too Expensive,25,170.0569931487654,1
+908,Poor Customer Service,33,99.27944305623633,5
+909,Poor Customer Service,49,74.41998488326888,2
+910,Poor Customer Service,32,66.680281517077,2
+911,Product Quality Issues,49,55.03229060687695,3
+912,Poor Customer Service,35,30.37656479582448,5
+913,Found Better Alternative,44,81.6406361902484,1
+914,Poor Customer Service,38,68.64458458354099,2
+915,Product Quality Issues,26,193.9551294559533,5
+916,Poor Customer Service,11,120.3875887250079,5
+917,Poor Customer Service,35,82.50986702549136,1
+918,Service Not Needed Anymore,8,124.48416817886527,5
+919,Too Expensive,46,45.05540624222519,5
+920,Better Price Elsewhere,14,99.92787485639653,5
+921,Moved to Competitor,10,132.7221778557915,2
+922,Product Quality Issues,2,108.00160972264125,1
+923,Moved to Competitor,46,92.32018411777837,5
+924,Too Expensive,9,198.89271000194566,5
+925,Poor Customer Service,3,178.45665718680686,2
+926,Better Price Elsewhere,21,132.2130724686992,1
+927,Poor Customer Service,26,122.4879250128109,3
+928,Product Quality Issues,8,131.71888636842513,2
+929,Found Better Alternative,48,56.236179408037984,1
+930,Poor Customer Service,2,91.12479378757735,5
+931,Better Price Elsewhere,6,27.102715920361877,1
+932,Too Expensive,28,105.5982867476288,1
+933,Technical Issues,53,117.74442511237937,1
+934,Product Quality Issues,29,60.994952498577724,3
+935,Better Price Elsewhere,26,193.52519248979246,1
+936,Poor Customer Service,25,183.70182996870355,3
+937,Better Price Elsewhere,12,149.98578238206306,5
+938,Moved to Competitor,5,116.00959317776527,3
+939,Better Price Elsewhere,34,176.5944487365833,5
+940,Product Quality Issues,48,43.517421888223325,5
+941,Poor Customer Service,37,162.2917629694793,3
+942,Product Quality Issues,15,42.4677465140327,2
+943,Found Better Alternative,44,162.95791925889299,4
+944,Too Expensive,36,69.63816228524425,1
+945,Better Price Elsewhere,15,177.87630458327402,4
+946,Better Price Elsewhere,43,189.92757688857162,1
+947,Better Price Elsewhere,48,46.78327449292082,1
+948,Moved to Competitor,23,103.28160891177083,5
+949,Moved to Competitor,6,196.57772806928332,1
+950,Product Quality Issues,46,107.01333847516639,1
+951,Found Better Alternative,50,175.43855405261812,3
+952,Found Better Alternative,44,125.97167398363757,4
+953,Better Price Elsewhere,59,87.55938342552834,3
+954,Moved to Competitor,43,71.44103999465663,1
+955,Poor Customer Service,45,56.580156395495706,5
+956,Poor Customer Service,21,157.1236744479855,3
+957,Product Quality Issues,23,89.57729122814501,3
+958,Better Price Elsewhere,43,112.0295831961352,2
+959,Better Price Elsewhere,55,108.61858640021275,1
+960,Found Better Alternative,16,123.91022526196362,5
+961,Better Price Elsewhere,47,175.8038862124194,3
+962,Found Better Alternative,53,196.53308184501728,3
+963,Better Price Elsewhere,15,93.36515754328705,5
+964,Poor Customer Service,25,168.95340597913454,1
+965,Poor Customer Service,36,157.61500303784916,2
+966,Poor Customer Service,11,123.23521126200319,3
+967,Found Better Alternative,51,192.08848585014795,2
+968,Poor Customer Service,15,56.085412795112504,4
+969,Product Quality Issues,4,39.66755785573186,1
+970,Product Quality Issues,21,173.71315405197598,4
+971,Found Better Alternative,13,99.0469669940747,4
+972,Service Not Needed Anymore,22,172.45439375727088,4
+973,Found Better Alternative,19,180.75623693517468,1
+974,Better Price Elsewhere,34,31.24236685143286,1
+975,Better Price Elsewhere,14,179.02365733749093,5
+976,Poor Customer Service,4,100.69742996649599,2
+977,Product Quality Issues,48,111.8778480207618,2
+978,Better Price Elsewhere,53,132.78665199677783,5
+979,Product Quality Issues,52,186.7488692114156,5
+980,Product Quality Issues,46,23.440896997357527,4
+981,Poor Customer Service,27,105.83182429720708,5
+982,Too Expensive,29,143.78996763750092,3
+983,Better Price Elsewhere,47,150.08725238568113,2
+984,Better Price Elsewhere,28,144.65583767667943,5
+985,Found Better Alternative,35,44.19832329346193,3
+986,Product Quality Issues,8,73.89120590690263,3
+987,Found Better Alternative,16,84.56879457506243,3
+988,Poor Customer Service,42,164.7986973823109,3
+989,Better Price Elsewhere,36,70.17677703461955,4
+990,Too Expensive,30,57.92689349609657,3
+991,Too Expensive,18,192.3406434268573,4
+992,Found Better Alternative,2,21.5953913204244,4
+993,Poor Customer Service,49,199.60775402275607,3
+994,Product Quality Issues,13,141.8278337943312,2
+995,Poor Customer Service,4,169.12447390084108,3
+996,Better Price Elsewhere,26,73.03149134231477,3
+997,Moved to Competitor,25,22.576749980070797,3
+998,Better Price Elsewhere,30,152.81651334107542,2
+999,Service Not Needed Anymore,11,170.14602746012164,1
+1000,Poor Customer Service,7,153.28570375163343,1
